@@ -1,0 +1,68 @@
+{
+  "name": "@coinmarketcap/sdk",
+  "version": "4.0.0",
+  "description": "Official CoinMarketCap Pro API TypeScript/JavaScript SDK",
+  "author": "CoinMarketCap <api@coinmarketcap.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenCMC/coinmarketcap-api-typescript"
+  },
+  "homepage": "https://coinmarketcap.com/api/documentation/",
+  "keywords": [
+    "coinmarketcap",
+    "cmc",
+    "cryptocurrency",
+    "api",
+    "sdk",
+    "bitcoin",
+    "ethereum",
+    "crypto"
+  ],
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p tsconfig.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
+    "clean": "rm -rf dist",
+    "test": "node --import tsx --test test/*.test.ts",
+    "lint:publint": "publint",
+    "lint:types": "attw --pack || true",
+    "check": "npm run lint:publint && npm run lint:types",
+    "prepublishOnly": "npm run clean && npm run build && npm run check"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.0",
+    "@types/node": "^20.17.0",
+    "publint": "^0.2.12",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
