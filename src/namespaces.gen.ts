@@ -301,7 +301,7 @@ export function createNamespaces(client: Client) {
     /** Holder */
     holder: {
       /** POST /v1/dex/holders/list — Get holders list */
-      s: ((opts: Omit<Parameters<typeof getHolders>[0], 'client'>) => getHolders({ ...opts, client })) as OmitClient<typeof getHolders>,
+      holders: ((opts: Omit<Parameters<typeof getHolders>[0], 'client'>) => getHolders({ ...opts, client })) as OmitClient<typeof getHolders>,
       /** POST /v1/dex/holders/detail — Get holder detail */
       detail: ((opts: Omit<Parameters<typeof getHolderDetail>[0], 'client'>) => getHolderDetail({ ...opts, client })) as OmitClient<typeof getHolderDetail>,
       /** GET /v1/dex/holders/trend/list — Get holder trend list */
@@ -361,7 +361,7 @@ export function createNamespaces(client: Client) {
       /** GET /v4/dex/pairs/quotes/latest — Quotes Latest */
       latestPairsQuotes: ((opts: Omit<Parameters<typeof getLatestPairsQuotes>[0], 'client'>) => getLatestPairsQuotes({ ...opts, client })) as OmitClient<typeof getLatestPairsQuotes>,
       /** GET /v1/dex/token — Get token detail */
-      getToken: ((opts: Omit<Parameters<typeof getToken>[0], 'client'>) => getToken({ ...opts, client })) as OmitClient<typeof getToken>,
+      token: ((opts: Omit<Parameters<typeof getToken>[0], 'client'>) => getToken({ ...opts, client })) as OmitClient<typeof getToken>,
       /** GET /v1/dex/token/price — Get token price */
       price: ((opts: Omit<Parameters<typeof getTokenPrice>[0], 'client'>) => getTokenPrice({ ...opts, client })) as OmitClient<typeof getTokenPrice>,
       /** GET /v1/dex/token/pools — Get token pools */

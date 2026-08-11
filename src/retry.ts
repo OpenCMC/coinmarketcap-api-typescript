@@ -21,7 +21,9 @@ export function getRetryDelay(attempt: number, status: number, config: RetryConf
     const retryAfter = headers.get('Retry-After');
     if (retryAfter) {
       const seconds = Number(retryAfter);
-      if (!isNaN(seconds)) return seconds * 1000;
+      // Honour Retry-After, but never wait longer than maxDelayMs — otherwise a
+      // large value (e.g. "Retry-After: 3600") would hang the call for an hour.
+      if (!isNaN(seconds)) return Math.min(seconds * 1000, config.maxDelayMs);
     }
   }
   const base = config.initialDelayMs * Math.pow(2, attempt);

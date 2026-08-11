@@ -41,4 +41,10 @@ describe('CoinMarketCap', () => {
     assert.equal(typeof cmc.api.cryptocurrency, 'object');
     assert.equal(typeof cmc.api.cryptocurrency.quotesLatest, 'function');
   });
+
+  it('exposes holder.holders, not the malformed holder.s (#4)', () => {
+    const cmc = new CoinMarketCap({ apiKey: 'test-key' });
+    assert.equal(typeof cmc.api.holder.holders, 'function');
+    assert.equal((cmc.api.holder as Record<string, unknown>).s, undefined);
+  });
 });

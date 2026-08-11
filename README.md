@@ -1,5 +1,8 @@
 # @coinmarketcap/sdk
 
+[![npm version](https://img.shields.io/npm/v/@coinmarketcap/sdk.svg)](https://www.npmjs.com/package/@coinmarketcap/sdk)
+[![node](https://img.shields.io/node/v/@coinmarketcap/sdk.svg)](https://nodejs.org/)
+
 The official TypeScript/JavaScript SDK for the [CoinMarketCap Pro API](https://coinmarketcap.com/api/documentation/).
 
 ## Installation
@@ -15,13 +18,13 @@ pnpm add @coinmarketcap/sdk
 ## Quick Start
 
 ```typescript
-import { CoinMarketCap } from '@coinmarketcap/sdk';
+import { CoinMarketCap } from "@coinmarketcap/sdk";
 
 const cmc = new CoinMarketCap({ apiKey: process.env.CMC_PRO_API_KEY! });
 
 // Use the namespace API — discover endpoints by category with autocomplete
 const { data, error } = await cmc.api.cryptocurrency.quotesLatest({
-  query: { id: '1,1027' },  // 1 = BTC, 1027 = ETH
+  query: { id: "1,1027" }, // 1 = BTC, 1027 = ETH
 });
 
 if (data) {
@@ -36,14 +39,14 @@ if (data) {
 All endpoints are grouped by category on `cmc.api`:
 
 ```typescript
-import { CoinMarketCap } from '@coinmarketcap/sdk';
+import { CoinMarketCap } from "@coinmarketcap/sdk";
 
-const cmc = new CoinMarketCap({ apiKey: 'your-key' });
+const cmc = new CoinMarketCap({ apiKey: "your-key" });
 
-await cmc.api.cryptocurrency.quotesLatest({ query: { id: '1' } });
+await cmc.api.cryptocurrency.quotesLatest({ query: { id: "1" } });
 await cmc.api.cryptocurrency.listingsLatest({ query: { limit: 10 } });
 await cmc.api.globalMetrics.quotesLatest({});
-await cmc.api.exchange.info({ query: { id: '270' } });
+await cmc.api.exchange.info({ query: { id: "270" } });
 ```
 
 ### Bare Functions (Explicit Client)
@@ -51,13 +54,16 @@ await cmc.api.exchange.info({ query: { id: '270' } });
 You can also import individual functions and pass the client explicitly:
 
 ```typescript
-import { CoinMarketCap, getV1CryptocurrencyQuotesLatest } from '@coinmarketcap/sdk';
+import {
+  CoinMarketCap,
+  getV1CryptocurrencyQuotesLatest,
+} from "@coinmarketcap/sdk";
 
-const cmc = new CoinMarketCap({ apiKey: 'your-key' });
+const cmc = new CoinMarketCap({ apiKey: "your-key" });
 
 const { data } = await getV1CryptocurrencyQuotesLatest({
   client: cmc.client,
-  query: { id: '1', convert: 'USD' },
+  query: { id: "1", convert: "USD" },
 });
 ```
 
@@ -66,15 +72,15 @@ const { data } = await getV1CryptocurrencyQuotesLatest({
 For simple scripts, `init()` configures the global client so bare functions work without passing `client`:
 
 ```typescript
-import { init, getV1CryptocurrencyQuotesLatest } from '@coinmarketcap/sdk';
+import { init, getV1CryptocurrencyQuotesLatest } from "@coinmarketcap/sdk";
 
-const cmc = init({ apiKey: 'your-key' });
+const cmc = init({ apiKey: "your-key" });
 
 // Namespace works on the returned instance
-await cmc.api.cryptocurrency.quotesLatest({ query: { id: '1' } });
+await cmc.api.cryptocurrency.quotesLatest({ query: { id: "1" } });
 
 // Bare functions also work (use the global client)
-await getV1CryptocurrencyQuotesLatest({ query: { id: '1' } });
+await getV1CryptocurrencyQuotesLatest({ query: { id: "1" } });
 ```
 
 ### Configuration Options
@@ -82,14 +88,14 @@ await getV1CryptocurrencyQuotesLatest({ query: { id: '1' } });
 ```typescript
 const cmc = new CoinMarketCap({
   // Required for 'pro' mode
-  apiKey: 'your-api-key',
+  apiKey: "your-api-key",
 
   // Optional
-  environment: 'pro',     // 'pro' (default) or 'public'
-  baseUrl: undefined,     // Override base URL entirely
-  timeout: 30000,         // Request timeout in ms (default: 30s)
-  maxRetries: 2,          // Auto-retry count (default: 2)
-  fetch: customFetch,     // Custom fetch implementation
+  environment: "pro", // 'pro' (default) or 'public'
+  baseUrl: undefined, // Override base URL entirely
+  timeout: 30000, // Request timeout in ms (default: 30s)
+  maxRetries: 2, // Auto-retry count (default: 2)
+  fetch: customFetch, // Custom fetch implementation
 });
 ```
 
@@ -98,9 +104,9 @@ const cmc = new CoinMarketCap({
 Use the public API without an API key for publicly available endpoints:
 
 ```typescript
-import { CoinMarketCap } from '@coinmarketcap/sdk';
+import { CoinMarketCap } from "@coinmarketcap/sdk";
 
-const cmc = new CoinMarketCap({ environment: 'public' });
+const cmc = new CoinMarketCap({ environment: "public" });
 
 await cmc.api.cryptocurrency.listingsLatest({ query: { limit: 10 } });
 ```
@@ -110,19 +116,24 @@ await cmc.api.cryptocurrency.listingsLatest({ query: { limit: 10 } });
 The SDK provides typed error classes for common HTTP failures:
 
 ```typescript
-import { CoinMarketCap, CMCError, RateLimitError, AuthenticationError } from '@coinmarketcap/sdk';
+import {
+  CoinMarketCap,
+  CMCError,
+  RateLimitError,
+  AuthenticationError,
+} from "@coinmarketcap/sdk";
 
-const cmc = new CoinMarketCap({ apiKey: 'your-key' });
+const cmc = new CoinMarketCap({ apiKey: "your-key" });
 
 const { data, error } = await cmc.api.cryptocurrency.quotesLatest({
-  query: { id: '1' },
+  query: { id: "1" },
 });
 
 if (error) {
   if (error instanceof RateLimitError) {
-    console.log('Rate limited, retry after:', error.headers.get('Retry-After'));
+    console.log("Rate limited, retry after:", error.headers.get("Retry-After"));
   } else if (error instanceof AuthenticationError) {
-    console.log('Invalid API key');
+    console.log("Invalid API key");
   } else if (error instanceof CMCError) {
     console.log(`API error ${error.status}:`, error.message);
   }
@@ -131,29 +142,29 @@ if (error) {
 
 ### Error Types
 
-| Status Code | Error Class            |
-|-------------|------------------------|
-| 400         | `BadRequestError`      |
-| 401         | `AuthenticationError`  |
-| 403         | `ForbiddenError`       |
-| 404         | `NotFoundError`        |
-| 429         | `RateLimitError`       |
-| 5xx         | `InternalServerError`  |
-| Network     | `APIConnectionError`   |
-| Timeout     | `APITimeoutError`      |
+| Status Code | Error Class           |
+| ----------- | --------------------- |
+| 400         | `BadRequestError`     |
+| 401         | `AuthenticationError` |
+| 403         | `ForbiddenError`      |
+| 404         | `NotFoundError`       |
+| 429         | `RateLimitError`      |
+| 5xx         | `InternalServerError` |
+| Network     | `APIConnectionError`  |
+| Timeout     | `APITimeoutError`     |
 
 ### Throw on Error
 
 Alternatively, you can throw errors instead of returning them:
 
 ```typescript
-import { CoinMarketCap, RateLimitError } from '@coinmarketcap/sdk';
+import { CoinMarketCap, RateLimitError } from "@coinmarketcap/sdk";
 
-const cmc = new CoinMarketCap({ apiKey: 'your-key' });
+const cmc = new CoinMarketCap({ apiKey: "your-key" });
 
 try {
   const { data } = await cmc.api.cryptocurrency.quotesLatest({
-    query: { id: '1' },
+    query: { id: "1" },
     throwOnError: true,
   });
   console.log(data);
@@ -168,15 +179,16 @@ try {
 
 Requests that fail with retryable status codes are automatically retried with exponential backoff:
 
-- **Retryable**: 408, 409, 429, 500, 502, 503, 504, and network errors
+- **Retryable**: 408, 409, 429, 500, 502, 503, 504, network errors, and timeouts
 - **Default**: 2 retries with 500ms initial delay, up to 8s max
-- **429 responses**: Respects the `Retry-After` header when present
+- **429 responses**: Respects the `Retry-After` header, capped at the max delay (8s) so a large value can't stall the call
+- **Body-safe**: Request bodies are replayed correctly on each retry (POST endpoints included)
 
 Disable retries:
 
 ```typescript
 const cmc = new CoinMarketCap({
-  apiKey: 'your-key',
+  apiKey: "your-key",
   maxRetries: 0,
 });
 ```
@@ -187,9 +199,25 @@ Requests time out after 30 seconds by default:
 
 ```typescript
 const cmc = new CoinMarketCap({
-  apiKey: 'your-key',
+  apiKey: "your-key",
   timeout: 10_000, // 10 seconds
 });
+```
+
+A timeout raises `APITimeoutError`.
+
+## Cancellation
+
+Pass an `AbortSignal` to cancel an in-flight request. Caller cancellation is
+honoured immediately and is never retried:
+
+```typescript
+const controller = new AbortController();
+const promise = cmc.api.cryptocurrency.quotesLatest({
+  query: { symbol: "BTC" },
+  signal: controller.signal,
+});
+controller.abort(); // rejects with an AbortError
 ```
 
 ## Available Endpoints
@@ -215,7 +243,7 @@ import {
   getV1CryptocurrencyInfo,
   getV1CryptocurrencyMap,
   // ... 100+ more endpoints
-} from '@coinmarketcap/sdk';
+} from "@coinmarketcap/sdk";
 ```
 
 ## Requirements

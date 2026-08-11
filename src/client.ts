@@ -21,16 +21,35 @@ function buildFetchWithRetry(
     input: RequestInfo | URL,
     init?: RequestInit,
   ): Promise<Response> => {
+    // Normalize into a Request so we can send a *fresh* body on every attempt.
+    // Re-sending an already-consumed stream body throws "Body is unusable",
+    // which previously broke every retried POST (e.g. all DEX POST endpoints).
+    const baseRequest = new Request(input, init);
+    const userSignal: AbortSignal | null =
+      init?.signal ?? (input instanceof Request ? input.signal : null) ?? null;
+
     let lastResponse: Response | undefined;
     let lastError: unknown;
 
     for (let attempt = 0; attempt <= retryConfig.maxRetries; attempt++) {
+      // Per-attempt controller combining the timeout with the caller's signal
+      // so user-initiated cancellation is honoured (previously ignored).
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
+      let timedOut = false;
+
+      const onUserAbort = () => controller.abort();
+      if (userSignal) {
+        if (userSignal.aborted) controller.abort();
+        else userSignal.addEventListener('abort', onUserAbort, { once: true });
+      }
+      const timeoutId = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, timeout);
 
       try {
-        const response = await baseFetch(input, { ...init, signal: controller.signal });
-        clearTimeout(timeoutId);
+        // Clone per attempt so the buffered body can be replayed on retry.
+        const response = await baseFetch(baseRequest.clone(), { signal: controller.signal });
 
         if (response.ok || !shouldRetry(response.status, retryConfig)) {
           return response;
@@ -41,18 +60,29 @@ function buildFetchWithRetry(
           await sleep(getRetryDelay(attempt, response.status, retryConfig, response.headers));
         }
       } catch (error: unknown) {
-        clearTimeout(timeoutId);
+        // Timeout: transient, retry with a typed error surfaced if exhausted.
+        if (timedOut) {
+          lastError = new APITimeoutError(timeout);
+          if (attempt < retryConfig.maxRetries) {
+            await sleep(getRetryDelay(attempt, 0, retryConfig, new Headers()));
+          }
+          continue;
+        }
+
+        // Caller cancelled: propagate immediately, never retry.
+        if (userSignal?.aborted) {
+          throw error;
+        }
+
         lastError = error;
-
-        const isRetryable =
-          (error instanceof DOMException && error.name === 'AbortError') ||
-          error instanceof TypeError;
-
-        if (!isRetryable) throw error;
+        if (!(error instanceof TypeError)) throw error; // non-network error
 
         if (attempt < retryConfig.maxRetries) {
           await sleep(getRetryDelay(attempt, 0, retryConfig, new Headers()));
         }
+      } finally {
+        clearTimeout(timeoutId);
+        if (userSignal) userSignal.removeEventListener('abort', onUserAbort);
       }
     }
 
@@ -65,7 +95,6 @@ function applyInterceptors(
   target: Client,
   apiKey: string | undefined,
   env: Environment,
-  timeout: number,
 ): void {
   target.interceptors.request.use((request) => {
     if (env === 'pro' && apiKey) {
@@ -76,14 +105,16 @@ function applyInterceptors(
   });
 
   target.interceptors.error.use((error, response) => {
+    // Already-typed errors (incl. APITimeoutError raised by the fetch wrapper).
     if (error instanceof CMCError || error instanceof APIConnectionError) {
       return error;
     }
     if (response) {
       return CMCError.from(response.status, error, response.headers);
     }
+    // Caller-initiated cancellation — surface as-is, not as a timeout/connection error.
     if (error instanceof DOMException && error.name === 'AbortError') {
-      return new APITimeoutError(timeout);
+      return error;
     }
     return new APIConnectionError(
       error instanceof Error ? error.message : 'Connection failed',
@@ -139,7 +170,7 @@ export class CoinMarketCap {
       } as Config),
     );
 
-    applyInterceptors(this.client, options.apiKey, env, timeout);
+    applyInterceptors(this.client, options.apiKey, env);
 
     this.api = createNamespaces(this.client);
   }
@@ -188,7 +219,7 @@ export function init(options: CMCClientOptions): CoinMarketCap {
     baseUrl,
     fetch: buildFetchWithRetry(baseFetch, timeout, maxRetries),
   } as Config);
-  applyInterceptors(generatedDefaultClient, options.apiKey, env, timeout);
+  applyInterceptors(generatedDefaultClient, options.apiKey, env);
 
   // Also create a proper instance for namespace usage
   _defaultInstance = new CoinMarketCap(options);

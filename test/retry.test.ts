@@ -40,4 +40,10 @@ describe('getRetryDelay', () => {
     const delay = getRetryDelay(10, 500, DEFAULT_RETRY, headers);
     assert(delay <= DEFAULT_RETRY.maxDelayMs);
   });
+
+  it('caps a large Retry-After at maxDelayMs (#3)', () => {
+    const headers = new Headers({ 'Retry-After': '3600' });
+    const delay = getRetryDelay(0, 429, DEFAULT_RETRY, headers);
+    assert.equal(delay, DEFAULT_RETRY.maxDelayMs);
+  });
 });
