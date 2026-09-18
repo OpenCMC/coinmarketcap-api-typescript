@@ -2,12 +2,13 @@
 
 Version: `3.0.3`
 
-Total endpoints: **107**
+Total endpoints: **110**
 
 ---
 
 ## Table of Contents
 
+- [CMC AI](#cmc-ai) (3 endpoints)
 - [CMC Index](#cmc-index) (4 endpoints)
 - [Community](#community) (2 endpoints)
 - [Content](#content) (4 endpoints)
@@ -23,6 +24,66 @@ Total endpoints: **107**
 - [Real World Assets](#real-world-assets) (7 endpoints)
 - [Token](#token) (16 endpoints)
 - [Tools](#tools) (4 endpoints)
+
+---
+
+## CMC AI
+
+### `GET` /v5/cmc-ai/coins/latest
+
+**Coin Insights Latest**
+
+Function: `getV5CmcAiCoinsLatest`
+
+**Query parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `crypto_id` | string | No | One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: `1,1027`. |
+| `slug` | string | No | Alternatively pass comma-separated cryptocurrency slugs. Example: `bitcoin,ether |
+| `symbol` | string | No | Alternatively pass comma-separated cryptocurrency symbols. Example: `BTC,ETH`. M |
+| `type` | string | No | Optionally filter by insight type. Comma-separated. Allowed: `fixed_question`, ` |
+| `question_key` | string | No | Optionally filter fixed questions by semantic key. Comma-separated. Allowed: `pr |
+| `sources_limit` | integer | No | Max source URLs to return per insight. Default 10, max 100. Pass `0` to return a |
+| `skip_invalid` | boolean | No | When requesting multiple cryptocurrencies, pass `true` to skip unresolvable iden |
+| `start` | integer | No | 1-based offset of the paginated list to return. |
+| `limit` | integer | No | Number of results to return. Use with `start` to page through the list. Default  |
+
+---
+
+### `GET` /v5/cmc-ai/coins/map
+
+**CMC AI Map**
+
+Function: `getV5CmcAiCoinsMap`
+
+**Query parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `crypto_id` | string | No | One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: `1,1027`. |
+| `slug` | string | No | Alternatively pass comma-separated cryptocurrency slugs. Example: `bitcoin,ether |
+| `symbol` | string | No | Alternatively pass comma-separated cryptocurrency symbols. Example: `BTC,ETH`. M |
+| `sort` | string | No | Field used to sort the list. One of `cmc_rank`, `crypto_id`, `name`. Default `cm |
+| `start` | integer | No | 1-based offset of the paginated list to return. |
+| `limit` | integer | No | Number of results to return. Use with `start` to page through the list. Default  |
+
+---
+
+### `GET` /v5/cmc-ai/latest
+
+**Market Feed Latest**
+
+Function: `getV5CmcAiLatest`
+
+**Query parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `type` | string | No | Optionally filter by insight type. Comma-separated. Allowed: `fixed_question`, ` |
+| `sources_limit` | integer | No | Max source URLs to return per insight. Default 10, max 100. Pass `0` to return a |
+| `start` | integer | No | 1-based offset of the paginated list to return. |
+| `limit` | integer | No | Number of results to return. Use with `start` to page through the list. Default  |
 
 ---
 

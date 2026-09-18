@@ -5,6 +5,202 @@ export type ClientOptions = {
 };
 
 /**
+ * A canonical source URL for an insight. The only field on a source object.
+ */
+export type CmcAiSourceObject = {
+    /**
+     * Canonical full source URL. Tracking params are stripped; `twitter.com` is normalised to `x.com`.
+     */
+    url: string;
+};
+
+/**
+ * Two-section markdown answer, split from the stored blob using the same TLDR detection as the CoinMarketCap front end. No other edits are applied.
+ */
+export type CmcAiAnswerObject = {
+    /**
+     * TLDR section as markdown, returned as the model produced it.
+     */
+    tldr: string;
+    /**
+     * Everything after the TLDR (Deep Dive, Conclusion) as markdown, as the model produced it.
+     */
+    body: string;
+};
+
+/**
+ * A single CMC AI insight: a fixed question, a trending question, or a top-news headline, plus its generated answer and sources.
+ */
+export type CmcAiInsightObject = {
+    /**
+     * Insight type. One of `fixed_question`, `trending_question`, `top_news`. Never empty.
+     */
+    type: 'fixed_question' | 'trending_question' | 'top_news';
+    /**
+     * Display text: the question for `fixed_question`, the headline for `trending_question` and `top_news`. Never empty.
+     */
+    title: string;
+    /**
+     * 24-character hex id for this generated answer. Changes on regeneration, so a caller can detect content that needs re-translation. For `trending_question` and `top_news` it is also the item id. Never empty.
+     */
+    answer_id: string;
+    /**
+     * Stable semantic key for the question template. Set for `fixed_question`, `null` for `trending_question` and `top_news`. Market-level keys (on `/v5/cmc-ai/latest`): `altcoin_performance`, `trending_narratives`, `bullish_momentum`, `upcoming_events`, `market_sentiment`, `kol_discussion`. Coin-level keys (on `/v5/cmc-ai/coins/latest`): `price_up`, `price_down`, `future_price`, `sentiment`, `latest_news`, `overview`, `roadmap`, `codebase`. `price_up` and `price_down` are mutually exclusive.
+     */
+    question_key: 'price_up' | 'price_down' | 'future_price' | 'sentiment' | 'latest_news' | 'overview' | 'roadmap' | 'codebase' | 'altcoin_performance' | 'trending_narratives' | 'bullish_momentum' | 'upcoming_events' | 'market_sentiment' | 'kol_discussion' | null;
+    answer: CmcAiAnswerObject;
+    /**
+     * Source references, capped by `sources_limit`. May be empty.
+     */
+    sources: Array<CmcAiSourceObject>;
+    /**
+     * True total sources for this insight, before `sources_limit` is applied.
+     */
+    sources_count: number;
+    /**
+     * `true` if `sources[]` has fewer entries than `sources_count`.
+     */
+    sources_truncated: boolean;
+    /**
+     * ISO 8601 UTC time the answer was generated. Never empty.
+     */
+    generated_at: string;
+};
+
+/**
+ * One requested cryptocurrency and its current CMC AI insights.
+ */
+export type CmcAiCoinObject = {
+    /**
+     * CoinMarketCap cryptocurrency ID.
+     */
+    crypto_id: number;
+    /**
+     * Cryptocurrency name.
+     */
+    name: string;
+    /**
+     * Cryptocurrency symbol.
+     */
+    symbol: string;
+    /**
+     * URL-friendly lowercase slug.
+     */
+    slug: string;
+    /**
+     * Insight objects for this cryptocurrency. Empty when the coin is covered but no content has been generated yet.
+     */
+    insights: Array<CmcAiInsightObject>;
+};
+
+/**
+ * A cryptocurrency currently in the CMC AI coverage set, without answer bodies.
+ */
+export type CmcAiCoverageCoinObject = {
+    /**
+     * CoinMarketCap cryptocurrency ID. Integer, not a string.
+     */
+    crypto_id: number;
+    /**
+     * Cryptocurrency name.
+     */
+    name: string;
+    /**
+     * Cryptocurrency symbol.
+     */
+    symbol: string;
+    /**
+     * URL-friendly lowercase slug.
+     */
+    slug: string;
+    /**
+     * Coin Detail Page URL.
+     */
+    url: string;
+    /**
+     * Fixed-question keys that currently have content for this cryptocurrency. May be empty.
+     */
+    available_question_keys: Array<'price_up' | 'price_down' | 'future_price' | 'sentiment' | 'latest_news' | 'overview' | 'roadmap' | 'codebase'>;
+    /**
+     * Insights currently available for this cryptocurrency, across all types.
+     */
+    num_insights: number;
+    /**
+     * ISO 8601 UTC time of the most recent generation. `null` if nothing has been generated yet.
+     */
+    last_generated_at: string | null;
+};
+
+/**
+ * Results of your query returned as an object.
+ */
+export type CmcAiLatestResultsObject = {
+    /**
+     * Insight objects. Never a bare array at `data`.
+     */
+    insights?: Array<CmcAiInsightObject>;
+    /**
+     * Total matching insights across all pages. Placed after the `insights[]` array.
+     */
+    total_size?: number;
+    /**
+     * `true` if more insights exist beyond this page, else `false`. Placed after the `insights[]` array.
+     */
+    has_more?: boolean;
+};
+
+export type CmcAiLatestResponseModel = {
+    data: CmcAiLatestResultsObject;
+    status?: ApiStatusObject;
+};
+
+/**
+ * Results of your query returned as an object.
+ */
+export type CmcAiCoinsLatestResultsObject = {
+    /**
+     * One object per requested cryptocurrency. Never a bare array at `data`.
+     */
+    coins?: Array<CmcAiCoinObject>;
+    /**
+     * Total number of matching cryptocurrencies across all pages. Placed after the `coins[]` array.
+     */
+    total_size?: number;
+    /**
+     * `true` if more cryptocurrencies exist beyond this page, else `false`. Placed after the `coins[]` array.
+     */
+    has_more?: boolean;
+};
+
+export type CmcAiCoinsLatestResponseModel = {
+    data: CmcAiCoinsLatestResultsObject;
+    status?: ApiStatusObject;
+};
+
+/**
+ * Results of your query returned as an object.
+ */
+export type CmcAiCoinsMapResultsObject = {
+    /**
+     * Supported cryptocurrencies. Never a bare array at `data`.
+     */
+    coins?: Array<CmcAiCoverageCoinObject>;
+    /**
+     * Total supported cryptocurrencies across all pages. Placed after the `coins[]` array.
+     */
+    total_size?: number;
+    /**
+     * `true` if more records exist beyond this page, else `false`. Placed after the `coins[]` array.
+     */
+    has_more?: boolean;
+};
+
+export type CmcAiCoinsMapResponseModel = {
+    data: CmcAiCoinsMapResultsObject;
+    status?: ApiStatusObject;
+};
+
+/**
  * Latest-price entry for a single cryptocurrency.
  */
 export type V2SimplePriceItemObject = {
@@ -8068,11 +8264,11 @@ export type GlobalMetricsQuotesHistoricCurrencyQuoteObject = {
      */
     total_volume_24h_reported: number;
     /**
-     * The sum of rolling 24 hour adjusted volume (as outlined in our methodology) for all cryptocurrencies excluding Bitcoin at the given point in time, historically converted into units of the requested currency.
+     * The sum of all individual cryptocurrency market capitalizations excluding Bitcoin at the given point in time, historically converted into units of the requested currency.
      */
     altcoin_market_cap: number;
     /**
-     * The sum of all individual cryptocurrency market capitalizations excluding Bitcoin at the given point in time, historically converted into units of the requested currency.
+     * The sum of rolling 24 hour adjusted volume (as outlined in our methodology) for all cryptocurrencies excluding Bitcoin at the given point in time, historically converted into units of the requested currency.
      */
     altcoin_volume_24h: number;
     /**
@@ -12905,6 +13101,208 @@ export type GetV5DerivativesLiquidationsCryptocurrencyListLatestResponses = {
 };
 
 export type GetV5DerivativesLiquidationsCryptocurrencyListLatestResponse = GetV5DerivativesLiquidationsCryptocurrencyListLatestResponses[keyof GetV5DerivativesLiquidationsCryptocurrencyListLatestResponses];
+
+export type GetV5CmcAiCoinsMapData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: `1,1027`. Mutually exclusive with `slug` and `symbol`.
+         */
+        crypto_id?: string;
+        /**
+         * Alternatively pass comma-separated cryptocurrency slugs. Example: `bitcoin,ethereum`. Mutually exclusive with `crypto_id` and `symbol`.
+         */
+        slug?: string;
+        /**
+         * Alternatively pass comma-separated cryptocurrency symbols. Example: `BTC,ETH`. Mutually exclusive with `crypto_id` and `slug`.
+         */
+        symbol?: string;
+        /**
+         * Field used to sort the list. One of `cmc_rank`, `crypto_id`, `name`. Default `cmc_rank`.
+         */
+        sort?: 'cmc_rank' | 'crypto_id' | 'name';
+        /**
+         * 1-based offset of the paginated list to return.
+         */
+        start?: number;
+        /**
+         * Number of results to return. Use with `start` to page through the list. Default 100, max 250.
+         */
+        limit?: number;
+    };
+    url: '/v5/cmc-ai/coins/map';
+};
+
+export type GetV5CmcAiCoinsMapErrors = {
+    /**
+     * Bad Request
+     */
+    400: HttpStatus400ErrorObject;
+    /**
+     * Unauthorized
+     */
+    401: HttpStatus401ErrorObject;
+    /**
+     * Forbidden
+     */
+    403: HttpStatus403ErrorObject;
+    /**
+     * Too Many Requests
+     */
+    429: HttpStatus429ErrorObject;
+    /**
+     * Internal Server Error
+     */
+    500: HttpStatus500ErrorObject;
+};
+
+export type GetV5CmcAiCoinsMapError = GetV5CmcAiCoinsMapErrors[keyof GetV5CmcAiCoinsMapErrors];
+
+export type GetV5CmcAiCoinsMapResponses = {
+    /**
+     * Successful
+     */
+    200: CmcAiCoinsMapResponseModel;
+};
+
+export type GetV5CmcAiCoinsMapResponse = GetV5CmcAiCoinsMapResponses[keyof GetV5CmcAiCoinsMapResponses];
+
+export type GetV5CmcAiLatestData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Optionally filter by insight type. Comma-separated. Allowed: `fixed_question`, `trending_question`, `top_news`. Example: `top_news` or `fixed_question,trending_question`.
+         */
+        type?: string;
+        /**
+         * Max source URLs to return per insight. Default 10, max 100. Pass `0` to return an empty `sources[]` while still populating `sources_count`.
+         */
+        sources_limit?: number;
+        /**
+         * 1-based offset of the paginated list to return.
+         */
+        start?: number;
+        /**
+         * Number of results to return. Use with `start` to page through the list. Default 100, max 250.
+         */
+        limit?: number;
+    };
+    url: '/v5/cmc-ai/latest';
+};
+
+export type GetV5CmcAiLatestErrors = {
+    /**
+     * Bad Request
+     */
+    400: HttpStatus400ErrorObject;
+    /**
+     * Unauthorized
+     */
+    401: HttpStatus401ErrorObject;
+    /**
+     * Forbidden
+     */
+    403: HttpStatus403ErrorObject;
+    /**
+     * Too Many Requests
+     */
+    429: HttpStatus429ErrorObject;
+    /**
+     * Internal Server Error
+     */
+    500: HttpStatus500ErrorObject;
+};
+
+export type GetV5CmcAiLatestError = GetV5CmcAiLatestErrors[keyof GetV5CmcAiLatestErrors];
+
+export type GetV5CmcAiLatestResponses = {
+    /**
+     * Successful
+     */
+    200: CmcAiLatestResponseModel;
+};
+
+export type GetV5CmcAiLatestResponse = GetV5CmcAiLatestResponses[keyof GetV5CmcAiLatestResponses];
+
+export type GetV5CmcAiCoinsLatestData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: `1,1027`. Mutually exclusive with `slug` and `symbol`.
+         */
+        crypto_id?: string;
+        /**
+         * Alternatively pass comma-separated cryptocurrency slugs. Example: `bitcoin,ethereum`. Mutually exclusive with `crypto_id` and `symbol`.
+         */
+        slug?: string;
+        /**
+         * Alternatively pass comma-separated cryptocurrency symbols. Example: `BTC,ETH`. Mutually exclusive with `crypto_id` and `slug`.
+         */
+        symbol?: string;
+        /**
+         * Optionally filter by insight type. Comma-separated. Allowed: `fixed_question`, `trending_question`, `top_news`. Example: `top_news` or `fixed_question,trending_question`.
+         */
+        type?: string;
+        /**
+         * Optionally filter fixed questions by semantic key. Comma-separated. Allowed: `price_up`, `price_down`, `future_price`, `sentiment`, `latest_news`, `overview`, `roadmap`, `codebase`. Ignored for non-fixed types.
+         */
+        question_key?: string;
+        /**
+         * Max source URLs to return per insight. Default 10, max 100. Pass `0` to return an empty `sources[]` while still populating `sources_count`.
+         */
+        sources_limit?: number;
+        /**
+         * When requesting multiple cryptocurrencies, pass `true` to skip unresolvable identifiers and still return the valid ones. When `false` (default), any unresolvable identifier fails the whole request with `4001`.
+         */
+        skip_invalid?: boolean;
+        /**
+         * 1-based offset of the paginated list to return.
+         */
+        start?: number;
+        /**
+         * Number of results to return. Use with `start` to page through the list. Default 100, max 250.
+         */
+        limit?: number;
+    };
+    url: '/v5/cmc-ai/coins/latest';
+};
+
+export type GetV5CmcAiCoinsLatestErrors = {
+    /**
+     * Bad Request
+     */
+    400: HttpStatus400ErrorObject;
+    /**
+     * Unauthorized
+     */
+    401: HttpStatus401ErrorObject;
+    /**
+     * Forbidden
+     */
+    403: HttpStatus403ErrorObject;
+    /**
+     * Too Many Requests
+     */
+    429: HttpStatus429ErrorObject;
+    /**
+     * Internal Server Error
+     */
+    500: HttpStatus500ErrorObject;
+};
+
+export type GetV5CmcAiCoinsLatestError = GetV5CmcAiCoinsLatestErrors[keyof GetV5CmcAiCoinsLatestErrors];
+
+export type GetV5CmcAiCoinsLatestResponses = {
+    /**
+     * Successful
+     */
+    200: CmcAiCoinsLatestResponseModel;
+};
+
+export type GetV5CmcAiCoinsLatestResponse = GetV5CmcAiCoinsLatestResponses[keyof GetV5CmcAiCoinsLatestResponses];
 
 export type GetV1GlobalmetricsQuotesHistoricalData = {
     body?: never;

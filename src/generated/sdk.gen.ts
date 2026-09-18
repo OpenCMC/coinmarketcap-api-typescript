@@ -2,7 +2,7 @@
 
 import { client } from './client.gen.js';
 import type { Client, Options as Options2, TDataShape } from './client/index.js';
-import type { BatchGetTokenPriceData, BatchGetTokenPriceResponses, BatchQueryTokensData, BatchQueryTokensResponses, GetGainerLoserListData, GetGainerLoserListResponses, GetHolderCountData, GetHolderCountResponses, GetHolderDetailData, GetHolderDetailResponses, GetHoldersData, GetHoldersResponses, GetHolderTagCountData, GetHolderTagCountResponses, GetHoldTrendListData, GetHoldTrendListResponses, GetKlineCandlesData, GetKlineCandlesResponses, GetKlinePointsData, GetKlinePointsResponses, GetLatestListingsData, GetLatestListingsResponses, GetLatestPairsQuotesData, GetLatestPairsQuotesResponses, GetLiquidityChangeListData, GetLiquidityChangeListResponses, GetListingsInfoData, GetListingsInfoResponses, GetMemeListData, GetMemeListResponses, GetNetworksData, GetNetworksResponses, GetNewListData, GetNewListResponses, GetPairsHistoricalOhlcvData, GetPairsHistoricalOhlcvResponses, GetPairsLatestOhlcvData, GetPairsLatestOhlcvResponses, GetPairsLatestTradeData, GetPairsLatestTradeResponses, GetPlatformDetailData, GetPlatformDetailResponses, GetPlatformListData, GetPlatformListResponses, GetSecurityDetailData, GetSecurityDetailResponses, GetSpotPairsLatestData, GetSpotPairsLatestResponses, GetSwapListData, GetSwapListResponses, GetTokenData, GetTokenPoolsData, GetTokenPoolsResponses, GetTokenPriceData, GetTokenPriceResponses, GetTokenResponses, GetTrendingListData, GetTrendingListResponses, GetV1AltcoinSeasonIndexHistoricalData, GetV1AltcoinSeasonIndexHistoricalErrors, GetV1AltcoinSeasonIndexHistoricalResponses, GetV1AltcoinSeasonIndexLatestData, GetV1AltcoinSeasonIndexLatestErrors, GetV1AltcoinSeasonIndexLatestResponses, GetV1BlockchainStatisticsLatestData, GetV1BlockchainStatisticsLatestErrors, GetV1BlockchainStatisticsLatestResponses, GetV1CommunityTrendingTokenData, GetV1CommunityTrendingTokenErrors, GetV1CommunityTrendingTokenResponses, GetV1CommunityTrendingTopicData, GetV1CommunityTrendingTopicErrors, GetV1CommunityTrendingTopicResponses, GetV1ContentLatestData, GetV1ContentLatestErrors, GetV1ContentLatestResponses, GetV1ContentPostsCommentsData, GetV1ContentPostsCommentsErrors, GetV1ContentPostsCommentsResponses, GetV1ContentPostsLatestData, GetV1ContentPostsLatestErrors, GetV1ContentPostsLatestResponses, GetV1ContentPostsTopData, GetV1ContentPostsTopErrors, GetV1ContentPostsTopResponses, GetV1CryptocurrencyAirdropData, GetV1CryptocurrencyAirdropErrors, GetV1CryptocurrencyAirdropResponses, GetV1CryptocurrencyAirdropsData, GetV1CryptocurrencyAirdropsErrors, GetV1CryptocurrencyAirdropsResponses, GetV1CryptocurrencyCategoriesData, GetV1CryptocurrencyCategoriesErrors, GetV1CryptocurrencyCategoriesResponses, GetV1CryptocurrencyCategoryData, GetV1CryptocurrencyCategoryErrors, GetV1CryptocurrencyCategoryResponses, GetV1CryptocurrencyInfoData, GetV1CryptocurrencyInfoErrors, GetV1CryptocurrencyInfoResponses, GetV1CryptocurrencyListingsHistoricalData, GetV1CryptocurrencyListingsHistoricalErrors, GetV1CryptocurrencyListingsHistoricalResponses, GetV1CryptocurrencyListingsLatestData, GetV1CryptocurrencyListingsLatestErrors, GetV1CryptocurrencyListingsLatestResponses, GetV1CryptocurrencyListingsNewData, GetV1CryptocurrencyListingsNewErrors, GetV1CryptocurrencyListingsNewResponses, GetV1CryptocurrencyMapData, GetV1CryptocurrencyMapErrors, GetV1CryptocurrencyMapResponses, GetV1CryptocurrencyMarketpairsLatestData, GetV1CryptocurrencyMarketpairsLatestErrors, GetV1CryptocurrencyMarketpairsLatestResponses, GetV1CryptocurrencyMultiplierData, GetV1CryptocurrencyMultiplierErrors, GetV1CryptocurrencyMultiplierResponses, GetV1CryptocurrencyOhlcvHistoricalData, GetV1CryptocurrencyOhlcvHistoricalErrors, GetV1CryptocurrencyOhlcvHistoricalResponses, GetV1CryptocurrencyOhlcvLatestData, GetV1CryptocurrencyOhlcvLatestErrors, GetV1CryptocurrencyOhlcvLatestResponses, GetV1CryptocurrencyPriceperformancestatsLatestData, GetV1CryptocurrencyPriceperformancestatsLatestErrors, GetV1CryptocurrencyPriceperformancestatsLatestResponses, GetV1CryptocurrencyQuotesHistoricalData, GetV1CryptocurrencyQuotesHistoricalErrors, GetV1CryptocurrencyQuotesHistoricalResponses, GetV1CryptocurrencyQuotesLatestData, GetV1CryptocurrencyQuotesLatestErrors, GetV1CryptocurrencyQuotesLatestResponses, GetV1CryptocurrencyTrendingGainerslosersData, GetV1CryptocurrencyTrendingGainerslosersErrors, GetV1CryptocurrencyTrendingGainerslosersResponses, GetV1CryptocurrencyTrendingLatestData, GetV1CryptocurrencyTrendingLatestErrors, GetV1CryptocurrencyTrendingLatestResponses, GetV1CryptocurrencyTrendingMostvisitedData, GetV1CryptocurrencyTrendingMostvisitedErrors, GetV1CryptocurrencyTrendingMostvisitedResponses, GetV1ExchangeAssetsData, GetV1ExchangeAssetsErrors, GetV1ExchangeAssetsResponses, GetV1ExchangeInfoData, GetV1ExchangeInfoErrors, GetV1ExchangeInfoResponses, GetV1ExchangeListingsLatestData, GetV1ExchangeListingsLatestErrors, GetV1ExchangeListingsLatestResponses, GetV1ExchangeMapData, GetV1ExchangeMapErrors, GetV1ExchangeMapResponses, GetV1ExchangeMarketpairsLatestData, GetV1ExchangeMarketpairsLatestErrors, GetV1ExchangeMarketpairsLatestResponses, GetV1ExchangeQuotesHistoricalData, GetV1ExchangeQuotesHistoricalErrors, GetV1ExchangeQuotesHistoricalResponses, GetV1ExchangeQuotesLatestData, GetV1ExchangeQuotesLatestErrors, GetV1ExchangeQuotesLatestResponses, GetV1FiatMapData, GetV1FiatMapErrors, GetV1FiatMapResponses, GetV1GlobalmetricsQuotesHistoricalData, GetV1GlobalmetricsQuotesHistoricalErrors, GetV1GlobalmetricsQuotesHistoricalResponses, GetV1GlobalmetricsQuotesLatestData, GetV1GlobalmetricsQuotesLatestErrors, GetV1GlobalmetricsQuotesLatestResponses, GetV1KeyInfoData, GetV1KeyInfoErrors, GetV1KeyInfoResponses, GetV1PartnersFlipsidecryptoFcasListingsLatestData, GetV1PartnersFlipsidecryptoFcasListingsLatestErrors, GetV1PartnersFlipsidecryptoFcasListingsLatestResponses, GetV1PartnersFlipsidecryptoFcasQuotesLatestData, GetV1PartnersFlipsidecryptoFcasQuotesLatestErrors, GetV1PartnersFlipsidecryptoFcasQuotesLatestResponses, GetV1SimplePriceData, GetV1SimplePriceErrors, GetV1SimplePriceResponses, GetV1ToolsPostmanData, GetV1ToolsPostmanErrors, GetV1ToolsPriceconversionData, GetV1ToolsPriceconversionErrors, GetV1ToolsPriceconversionResponses, GetV2CryptocurrencyInfoData, GetV2CryptocurrencyInfoErrors, GetV2CryptocurrencyInfoResponses, GetV2CryptocurrencyMarketpairsLatestData, GetV2CryptocurrencyMarketpairsLatestErrors, GetV2CryptocurrencyMarketpairsLatestResponses, GetV2CryptocurrencyOhlcvHistoricalData, GetV2CryptocurrencyOhlcvHistoricalErrors, GetV2CryptocurrencyOhlcvHistoricalResponses, GetV2CryptocurrencyOhlcvLatestData, GetV2CryptocurrencyOhlcvLatestErrors, GetV2CryptocurrencyOhlcvLatestResponses, GetV2CryptocurrencyPriceperformancestatsLatestData, GetV2CryptocurrencyPriceperformancestatsLatestErrors, GetV2CryptocurrencyPriceperformancestatsLatestResponses, GetV2CryptocurrencyQuotesHistoricalData, GetV2CryptocurrencyQuotesHistoricalErrors, GetV2CryptocurrencyQuotesHistoricalResponses, GetV2CryptocurrencyQuotesLatestData, GetV2CryptocurrencyQuotesLatestErrors, GetV2CryptocurrencyQuotesLatestResponses, GetV2DexMultiplierData, GetV2DexMultiplierErrors, GetV2DexMultiplierResponses, GetV2SimplePriceData, GetV2SimplePriceErrors, GetV2SimplePriceResponses, GetV2ToolsPriceconversionData, GetV2ToolsPriceconversionErrors, GetV2ToolsPriceconversionResponses, GetV3CryptocurrencyListingsLatestData, GetV3CryptocurrencyListingsLatestErrors, GetV3CryptocurrencyListingsLatestResponses, GetV3CryptocurrencyQuotesHistoricalData, GetV3CryptocurrencyQuotesHistoricalErrors, GetV3CryptocurrencyQuotesHistoricalResponses, GetV3CryptocurrencyQuotesLatestData, GetV3CryptocurrencyQuotesLatestResponses, GetV3FearandgreedHistoricalData, GetV3FearandgreedHistoricalErrors, GetV3FearandgreedHistoricalResponses, GetV3FearandgreedLatestData, GetV3FearandgreedLatestErrors, GetV3FearandgreedLatestResponses, GetV3IndexCmc100HistoricalData, GetV3IndexCmc100HistoricalErrors, GetV3IndexCmc100HistoricalResponses, GetV3IndexCmc100LatestData, GetV3IndexCmc100LatestErrors, GetV3IndexCmc100LatestResponses, GetV3IndexCmc20HistoricalData, GetV3IndexCmc20HistoricalErrors, GetV3IndexCmc20HistoricalResponses, GetV3IndexCmc20LatestData, GetV3IndexCmc20LatestErrors, GetV3IndexCmc20LatestResponses, GetV5CryptocurrencyDerivativesMarketPairsListLatestData, GetV5CryptocurrencyDerivativesMarketPairsListLatestErrors, GetV5CryptocurrencyDerivativesMarketPairsListLatestResponses, GetV5DerivativesLiquidationsCryptocurrencyListLatestData, GetV5DerivativesLiquidationsCryptocurrencyListLatestErrors, GetV5DerivativesLiquidationsCryptocurrencyListLatestResponses, GetV5DerivativesLiquidationsExchangeListLatestData, GetV5DerivativesLiquidationsExchangeListLatestErrors, GetV5DerivativesLiquidationsExchangeListLatestResponses, GetV5DerivativesLiquidationsQuotesLatestData, GetV5DerivativesLiquidationsQuotesLatestErrors, GetV5DerivativesLiquidationsQuotesLatestResponses, GetV5ExchangeDerivativesListData, GetV5ExchangeDerivativesListErrors, GetV5ExchangeDerivativesListResponses, GetV5ExchangeDerivativesMarketPairsListLatestData, GetV5ExchangeDerivativesMarketPairsListLatestErrors, GetV5ExchangeDerivativesMarketPairsListLatestResponses, GetV5RealWorldAssetsAssetsListData, GetV5RealWorldAssetsAssetsListErrors, GetV5RealWorldAssetsAssetsListResponses, GetV5RealWorldAssetsInfoData, GetV5RealWorldAssetsInfoErrors, GetV5RealWorldAssetsInfoResponses, GetV5RealWorldAssetsIssuersData, GetV5RealWorldAssetsIssuersErrors, GetV5RealWorldAssetsIssuersListData, GetV5RealWorldAssetsIssuersListErrors, GetV5RealWorldAssetsIssuersListResponses, GetV5RealWorldAssetsIssuersResponses, GetV5RealWorldAssetsMapData, GetV5RealWorldAssetsMapErrors, GetV5RealWorldAssetsMapResponses, GetV5RealWorldAssetsMarketPairsListData, GetV5RealWorldAssetsMarketPairsListErrors, GetV5RealWorldAssetsMarketPairsListResponses, GetV5RealWorldAssetsQuotesLatestData, GetV5RealWorldAssetsQuotesLatestErrors, GetV5RealWorldAssetsQuotesLatestResponses, QueryTokenLiquidityData, QueryTokenLiquidityResponses, SearchData, SearchResponses } from './types.gen.js';
+import type { BatchGetTokenPriceData, BatchGetTokenPriceResponses, BatchQueryTokensData, BatchQueryTokensResponses, GetGainerLoserListData, GetGainerLoserListResponses, GetHolderCountData, GetHolderCountResponses, GetHolderDetailData, GetHolderDetailResponses, GetHoldersData, GetHoldersResponses, GetHolderTagCountData, GetHolderTagCountResponses, GetHoldTrendListData, GetHoldTrendListResponses, GetKlineCandlesData, GetKlineCandlesResponses, GetKlinePointsData, GetKlinePointsResponses, GetLatestListingsData, GetLatestListingsResponses, GetLatestPairsQuotesData, GetLatestPairsQuotesResponses, GetLiquidityChangeListData, GetLiquidityChangeListResponses, GetListingsInfoData, GetListingsInfoResponses, GetMemeListData, GetMemeListResponses, GetNetworksData, GetNetworksResponses, GetNewListData, GetNewListResponses, GetPairsHistoricalOhlcvData, GetPairsHistoricalOhlcvResponses, GetPairsLatestOhlcvData, GetPairsLatestOhlcvResponses, GetPairsLatestTradeData, GetPairsLatestTradeResponses, GetPlatformDetailData, GetPlatformDetailResponses, GetPlatformListData, GetPlatformListResponses, GetSecurityDetailData, GetSecurityDetailResponses, GetSpotPairsLatestData, GetSpotPairsLatestResponses, GetSwapListData, GetSwapListResponses, GetTokenData, GetTokenPoolsData, GetTokenPoolsResponses, GetTokenPriceData, GetTokenPriceResponses, GetTokenResponses, GetTrendingListData, GetTrendingListResponses, GetV1AltcoinSeasonIndexHistoricalData, GetV1AltcoinSeasonIndexHistoricalErrors, GetV1AltcoinSeasonIndexHistoricalResponses, GetV1AltcoinSeasonIndexLatestData, GetV1AltcoinSeasonIndexLatestErrors, GetV1AltcoinSeasonIndexLatestResponses, GetV1BlockchainStatisticsLatestData, GetV1BlockchainStatisticsLatestErrors, GetV1BlockchainStatisticsLatestResponses, GetV1CommunityTrendingTokenData, GetV1CommunityTrendingTokenErrors, GetV1CommunityTrendingTokenResponses, GetV1CommunityTrendingTopicData, GetV1CommunityTrendingTopicErrors, GetV1CommunityTrendingTopicResponses, GetV1ContentLatestData, GetV1ContentLatestErrors, GetV1ContentLatestResponses, GetV1ContentPostsCommentsData, GetV1ContentPostsCommentsErrors, GetV1ContentPostsCommentsResponses, GetV1ContentPostsLatestData, GetV1ContentPostsLatestErrors, GetV1ContentPostsLatestResponses, GetV1ContentPostsTopData, GetV1ContentPostsTopErrors, GetV1ContentPostsTopResponses, GetV1CryptocurrencyAirdropData, GetV1CryptocurrencyAirdropErrors, GetV1CryptocurrencyAirdropResponses, GetV1CryptocurrencyAirdropsData, GetV1CryptocurrencyAirdropsErrors, GetV1CryptocurrencyAirdropsResponses, GetV1CryptocurrencyCategoriesData, GetV1CryptocurrencyCategoriesErrors, GetV1CryptocurrencyCategoriesResponses, GetV1CryptocurrencyCategoryData, GetV1CryptocurrencyCategoryErrors, GetV1CryptocurrencyCategoryResponses, GetV1CryptocurrencyInfoData, GetV1CryptocurrencyInfoErrors, GetV1CryptocurrencyInfoResponses, GetV1CryptocurrencyListingsHistoricalData, GetV1CryptocurrencyListingsHistoricalErrors, GetV1CryptocurrencyListingsHistoricalResponses, GetV1CryptocurrencyListingsLatestData, GetV1CryptocurrencyListingsLatestErrors, GetV1CryptocurrencyListingsLatestResponses, GetV1CryptocurrencyListingsNewData, GetV1CryptocurrencyListingsNewErrors, GetV1CryptocurrencyListingsNewResponses, GetV1CryptocurrencyMapData, GetV1CryptocurrencyMapErrors, GetV1CryptocurrencyMapResponses, GetV1CryptocurrencyMarketpairsLatestData, GetV1CryptocurrencyMarketpairsLatestErrors, GetV1CryptocurrencyMarketpairsLatestResponses, GetV1CryptocurrencyMultiplierData, GetV1CryptocurrencyMultiplierErrors, GetV1CryptocurrencyMultiplierResponses, GetV1CryptocurrencyOhlcvHistoricalData, GetV1CryptocurrencyOhlcvHistoricalErrors, GetV1CryptocurrencyOhlcvHistoricalResponses, GetV1CryptocurrencyOhlcvLatestData, GetV1CryptocurrencyOhlcvLatestErrors, GetV1CryptocurrencyOhlcvLatestResponses, GetV1CryptocurrencyPriceperformancestatsLatestData, GetV1CryptocurrencyPriceperformancestatsLatestErrors, GetV1CryptocurrencyPriceperformancestatsLatestResponses, GetV1CryptocurrencyQuotesHistoricalData, GetV1CryptocurrencyQuotesHistoricalErrors, GetV1CryptocurrencyQuotesHistoricalResponses, GetV1CryptocurrencyQuotesLatestData, GetV1CryptocurrencyQuotesLatestErrors, GetV1CryptocurrencyQuotesLatestResponses, GetV1CryptocurrencyTrendingGainerslosersData, GetV1CryptocurrencyTrendingGainerslosersErrors, GetV1CryptocurrencyTrendingGainerslosersResponses, GetV1CryptocurrencyTrendingLatestData, GetV1CryptocurrencyTrendingLatestErrors, GetV1CryptocurrencyTrendingLatestResponses, GetV1CryptocurrencyTrendingMostvisitedData, GetV1CryptocurrencyTrendingMostvisitedErrors, GetV1CryptocurrencyTrendingMostvisitedResponses, GetV1ExchangeAssetsData, GetV1ExchangeAssetsErrors, GetV1ExchangeAssetsResponses, GetV1ExchangeInfoData, GetV1ExchangeInfoErrors, GetV1ExchangeInfoResponses, GetV1ExchangeListingsLatestData, GetV1ExchangeListingsLatestErrors, GetV1ExchangeListingsLatestResponses, GetV1ExchangeMapData, GetV1ExchangeMapErrors, GetV1ExchangeMapResponses, GetV1ExchangeMarketpairsLatestData, GetV1ExchangeMarketpairsLatestErrors, GetV1ExchangeMarketpairsLatestResponses, GetV1ExchangeQuotesHistoricalData, GetV1ExchangeQuotesHistoricalErrors, GetV1ExchangeQuotesHistoricalResponses, GetV1ExchangeQuotesLatestData, GetV1ExchangeQuotesLatestErrors, GetV1ExchangeQuotesLatestResponses, GetV1FiatMapData, GetV1FiatMapErrors, GetV1FiatMapResponses, GetV1GlobalmetricsQuotesHistoricalData, GetV1GlobalmetricsQuotesHistoricalErrors, GetV1GlobalmetricsQuotesHistoricalResponses, GetV1GlobalmetricsQuotesLatestData, GetV1GlobalmetricsQuotesLatestErrors, GetV1GlobalmetricsQuotesLatestResponses, GetV1KeyInfoData, GetV1KeyInfoErrors, GetV1KeyInfoResponses, GetV1PartnersFlipsidecryptoFcasListingsLatestData, GetV1PartnersFlipsidecryptoFcasListingsLatestErrors, GetV1PartnersFlipsidecryptoFcasListingsLatestResponses, GetV1PartnersFlipsidecryptoFcasQuotesLatestData, GetV1PartnersFlipsidecryptoFcasQuotesLatestErrors, GetV1PartnersFlipsidecryptoFcasQuotesLatestResponses, GetV1SimplePriceData, GetV1SimplePriceErrors, GetV1SimplePriceResponses, GetV1ToolsPostmanData, GetV1ToolsPostmanErrors, GetV1ToolsPriceconversionData, GetV1ToolsPriceconversionErrors, GetV1ToolsPriceconversionResponses, GetV2CryptocurrencyInfoData, GetV2CryptocurrencyInfoErrors, GetV2CryptocurrencyInfoResponses, GetV2CryptocurrencyMarketpairsLatestData, GetV2CryptocurrencyMarketpairsLatestErrors, GetV2CryptocurrencyMarketpairsLatestResponses, GetV2CryptocurrencyOhlcvHistoricalData, GetV2CryptocurrencyOhlcvHistoricalErrors, GetV2CryptocurrencyOhlcvHistoricalResponses, GetV2CryptocurrencyOhlcvLatestData, GetV2CryptocurrencyOhlcvLatestErrors, GetV2CryptocurrencyOhlcvLatestResponses, GetV2CryptocurrencyPriceperformancestatsLatestData, GetV2CryptocurrencyPriceperformancestatsLatestErrors, GetV2CryptocurrencyPriceperformancestatsLatestResponses, GetV2CryptocurrencyQuotesHistoricalData, GetV2CryptocurrencyQuotesHistoricalErrors, GetV2CryptocurrencyQuotesHistoricalResponses, GetV2CryptocurrencyQuotesLatestData, GetV2CryptocurrencyQuotesLatestErrors, GetV2CryptocurrencyQuotesLatestResponses, GetV2DexMultiplierData, GetV2DexMultiplierErrors, GetV2DexMultiplierResponses, GetV2SimplePriceData, GetV2SimplePriceErrors, GetV2SimplePriceResponses, GetV2ToolsPriceconversionData, GetV2ToolsPriceconversionErrors, GetV2ToolsPriceconversionResponses, GetV3CryptocurrencyListingsLatestData, GetV3CryptocurrencyListingsLatestErrors, GetV3CryptocurrencyListingsLatestResponses, GetV3CryptocurrencyQuotesHistoricalData, GetV3CryptocurrencyQuotesHistoricalErrors, GetV3CryptocurrencyQuotesHistoricalResponses, GetV3CryptocurrencyQuotesLatestData, GetV3CryptocurrencyQuotesLatestResponses, GetV3FearandgreedHistoricalData, GetV3FearandgreedHistoricalErrors, GetV3FearandgreedHistoricalResponses, GetV3FearandgreedLatestData, GetV3FearandgreedLatestErrors, GetV3FearandgreedLatestResponses, GetV3IndexCmc100HistoricalData, GetV3IndexCmc100HistoricalErrors, GetV3IndexCmc100HistoricalResponses, GetV3IndexCmc100LatestData, GetV3IndexCmc100LatestErrors, GetV3IndexCmc100LatestResponses, GetV3IndexCmc20HistoricalData, GetV3IndexCmc20HistoricalErrors, GetV3IndexCmc20HistoricalResponses, GetV3IndexCmc20LatestData, GetV3IndexCmc20LatestErrors, GetV3IndexCmc20LatestResponses, GetV5CmcAiCoinsLatestData, GetV5CmcAiCoinsLatestErrors, GetV5CmcAiCoinsLatestResponses, GetV5CmcAiCoinsMapData, GetV5CmcAiCoinsMapErrors, GetV5CmcAiCoinsMapResponses, GetV5CmcAiLatestData, GetV5CmcAiLatestErrors, GetV5CmcAiLatestResponses, GetV5CryptocurrencyDerivativesMarketPairsListLatestData, GetV5CryptocurrencyDerivativesMarketPairsListLatestErrors, GetV5CryptocurrencyDerivativesMarketPairsListLatestResponses, GetV5DerivativesLiquidationsCryptocurrencyListLatestData, GetV5DerivativesLiquidationsCryptocurrencyListLatestErrors, GetV5DerivativesLiquidationsCryptocurrencyListLatestResponses, GetV5DerivativesLiquidationsExchangeListLatestData, GetV5DerivativesLiquidationsExchangeListLatestErrors, GetV5DerivativesLiquidationsExchangeListLatestResponses, GetV5DerivativesLiquidationsQuotesLatestData, GetV5DerivativesLiquidationsQuotesLatestErrors, GetV5DerivativesLiquidationsQuotesLatestResponses, GetV5ExchangeDerivativesListData, GetV5ExchangeDerivativesListErrors, GetV5ExchangeDerivativesListResponses, GetV5ExchangeDerivativesMarketPairsListLatestData, GetV5ExchangeDerivativesMarketPairsListLatestErrors, GetV5ExchangeDerivativesMarketPairsListLatestResponses, GetV5RealWorldAssetsAssetsListData, GetV5RealWorldAssetsAssetsListErrors, GetV5RealWorldAssetsAssetsListResponses, GetV5RealWorldAssetsInfoData, GetV5RealWorldAssetsInfoErrors, GetV5RealWorldAssetsInfoResponses, GetV5RealWorldAssetsIssuersData, GetV5RealWorldAssetsIssuersErrors, GetV5RealWorldAssetsIssuersListData, GetV5RealWorldAssetsIssuersListErrors, GetV5RealWorldAssetsIssuersListResponses, GetV5RealWorldAssetsIssuersResponses, GetV5RealWorldAssetsMapData, GetV5RealWorldAssetsMapErrors, GetV5RealWorldAssetsMapResponses, GetV5RealWorldAssetsMarketPairsListData, GetV5RealWorldAssetsMarketPairsListErrors, GetV5RealWorldAssetsMarketPairsListResponses, GetV5RealWorldAssetsQuotesLatestData, GetV5RealWorldAssetsQuotesLatestErrors, GetV5RealWorldAssetsQuotesLatestResponses, QueryTokenLiquidityData, QueryTokenLiquidityResponses, SearchData, SearchResponses } from './types.gen.js';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -104,7 +104,7 @@ export const getV1CryptocurrencyMap = <ThrowOnError extends boolean = false>(opt
  * <Callout type="tip" title="Available with no API key">Call this endpoint keyless - no API key, no signup. Prefix the path with `/public-api`: `https://pro-api.coinmarketcap.com/public-api/v3/cryptocurrency/listings/latest`. See the [Keyless Public API](https://coinmarketcap.com/api/documentation/pro-api-reference/keyless-public-api) for the full list, rate limits, and examples.</Callout>
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 200 cryptocurrencies returned (rounded up) and 1 call credit per \`convert\` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per \`convert\` option beyond the first.
  * **CMC equivalent pages:** Our latest cryptocurrency listing and ranking pages like [coinmarketcap.com/all/views/all/](https://coinmarketcap.com/all/views/all/), [coinmarketcap.com/tokens/](https://coinmarketcap.com/tokens/), [coinmarketcap.com/gainers-losers/](https://coinmarketcap.com/gainers-losers/), [coinmarketcap.com/new/](https://coinmarketcap.com/new/).
  *
  * ***NOTE:** Use this endpoint if you need a sorted and paginated list of all cryptocurrencies. If you want to query for market data on a few specific cryptocurrencies use `/v3/cryptocurrency/quotes/latest` which is optimized for that purpose. The response data between these endpoints is otherwise the same.*
@@ -128,7 +128,7 @@ export const getV3CryptocurrencyListingsLatest = <ThrowOnError extends boolean =
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 200 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our "new" cryptocurrency page [coinmarketcap.com/new/](https://coinmarketcap.com/new)
  *
  * ***NOTE:** Use this endpoint if you need a sorted and paginated list of all recently added cryptocurrencies.*
@@ -205,7 +205,7 @@ export const getV1CryptocurrencyListingsHistorical = <ThrowOnError extends boole
  * <Callout type="tip" title="Available with no API key">Call this endpoint keyless - no API key, no signup. Prefix the path with `/public-api`: `https://pro-api.coinmarketcap.com/public-api/v3/cryptocurrency/quotes/latest`. See the [Keyless Public API](https://coinmarketcap.com/api/documentation/pro-api-reference/keyless-public-api) for the full list, rate limits, and examples.</Callout>
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 cryptocurrencies returned (rounded up) and 1 call credit per \`convert\` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per \`convert\` option beyond the first.
  * **CMC equivalent pages:** Latest market data pages for specific cryptocurrencies like [coinmarketcap.com/currencies/bitcoin/](https://coinmarketcap.com/currencies/bitcoin/).
  *
  * ***NOTE:** Use this endpoint to request the latest quote for specific cryptocurrencies. If you need to request all cryptocurrencies use `/v3/cryptocurrency/listings/latest` which is optimized for that purpose. The response data between these endpoints is otherwise the same.*
@@ -287,7 +287,7 @@ export const getV3CryptocurrencyQuotesHistorical = <ThrowOnError extends boolean
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 10 minutes. Additional OHLCV intervals and 1 minute updates will be available in the future.
- * **Plan credit use:** 1 call credit per 100 OHLCV values returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 OHLCV values returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** No equivalent, this data is only available via API.
  */
 export const getV2CryptocurrencyOhlcvLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV2CryptocurrencyOhlcvLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV2CryptocurrencyOhlcvLatestResponses, GetV2CryptocurrencyOhlcvLatestErrors, ThrowOnError>({
@@ -371,7 +371,7 @@ export const getV2CryptocurrencyOhlcvHistorical = <ThrowOnError extends boolean 
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 1 minute.
- * **Plan credit use:** 1 call credit per 100 market pairs returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 market pairs returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our active cryptocurrency markets pages like [coinmarketcap.com/currencies/bitcoin/#markets](https://coinmarketcap.com/currencies/bitcoin/#markets).
  */
 export const getV2CryptocurrencyMarketpairsLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV2CryptocurrencyMarketpairsLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV2CryptocurrencyMarketpairsLatestResponses, GetV2CryptocurrencyMarketpairsLatestErrors, ThrowOnError>({
@@ -398,7 +398,7 @@ export const getV2CryptocurrencyMarketpairsLatest = <ThrowOnError extends boolea
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** The statistics module displayed on cryptocurrency pages like [Bitcoin](https://coinmarketcap.com/currencies/bitcoin/).
  *
  * ***NOTE:** You may also use `/cryptocurrency/ohlcv/historical` for traditional OHLCV data at historical daily and hourly intervals. You may also use `/v1/cryptocurrency/ohlcv/latest` for OHLCV data for the current UTC day.*
@@ -428,7 +428,7 @@ export const getV2CryptocurrencyPriceperformancestatsLatest = <ThrowOnError exte
  * <Callout type="tip" title="Available with no API key">Call this endpoint keyless - no API key, no signup. Prefix the path with `/public-api`: `https://pro-api.coinmarketcap.com/public-api/v2/cryptocurrency/info`. See the [Keyless Public API](https://coinmarketcap.com/api/documentation/pro-api-reference/keyless-public-api) for the full list, rate limits, and examples.</Callout>
  *
  * **Cache / Update frequency:** Static data is updated only as needed, every 30 seconds.
- * **Plan credit use:** 1 call credit per 100 cryptocurrencies returned (rounded up).
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up).
  * **CMC equivalent pages:** Cryptocurrency detail page metadata like [coinmarketcap.com/currencies/bitcoin/](https://coinmarketcap.com/currencies/bitcoin/).
  */
 export const getV2CryptocurrencyInfo = <ThrowOnError extends boolean = false>(options?: Options<GetV2CryptocurrencyInfoData, ThrowOnError>) => (options?.client ?? client).get<GetV2CryptocurrencyInfoResponses, GetV2CryptocurrencyInfoErrors, ThrowOnError>({
@@ -451,7 +451,7 @@ export const getV2CryptocurrencyInfo = <ThrowOnError extends boolean = false>(op
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 10 minutes.
- * **Plan credit use:** 1 call credit per 200 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our cryptocurrency Trending page [coinmarketcap.com/trending-cryptocurrencies/](https://coinmarketcap.com/trending-cryptocurrencies/).
  */
 export const getV1CryptocurrencyTrendingLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV1CryptocurrencyTrendingLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV1CryptocurrencyTrendingLatestResponses, GetV1CryptocurrencyTrendingLatestErrors, ThrowOnError>({
@@ -476,7 +476,7 @@ export const getV1CryptocurrencyTrendingLatest = <ThrowOnError extends boolean =
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 10 minutes.
- * **Plan credit use:** 1 call credit per 200 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our cryptocurrency Gainers & Losers page [coinmarketcap.com/gainers-losers/](https://coinmarketcap.com/gainers-losers/).
  */
 export const getV1CryptocurrencyTrendingGainerslosers = <ThrowOnError extends boolean = false>(options?: Options<GetV1CryptocurrencyTrendingGainerslosersData, ThrowOnError>) => (options?.client ?? client).get<GetV1CryptocurrencyTrendingGainerslosersResponses, GetV1CryptocurrencyTrendingGainerslosersErrors, ThrowOnError>({
@@ -499,7 +499,7 @@ export const getV1CryptocurrencyTrendingGainerslosers = <ThrowOnError extends bo
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 24 hours.
- * **Plan credit use:** 1 call credit per 200 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** The CoinMarketCap “Most Visited” trending list. [coinmarketcap.com/most-viewed-pages/](https://coinmarketcap.com/most-viewed-pages/).
  */
 export const getV1CryptocurrencyTrendingMostvisited = <ThrowOnError extends boolean = false>(options?: Options<GetV1CryptocurrencyTrendingMostvisitedData, ThrowOnError>) => (options?.client ?? client).get<GetV1CryptocurrencyTrendingMostvisitedResponses, GetV1CryptocurrencyTrendingMostvisitedErrors, ThrowOnError>({
@@ -601,7 +601,7 @@ export const getV1CryptocurrencyCategories = <ThrowOnError extends boolean = fal
  * <Callout type="tip" title="Available with no API key">Call this endpoint keyless - no API key, no signup. Prefix the path with `/public-api`: `https://pro-api.coinmarketcap.com/public-api/v1/cryptocurrency/category`. See the [Keyless Public API](https://coinmarketcap.com/api/documentation/pro-api-reference/keyless-public-api) for the full list, rate limits, and examples.</Callout>
  *
  * **Cache / Update frequency:** Data is updated only as needed, every 30 seconds.
- * **Plan credit use:** 1 API call credit per request + 1 call credit per 200 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our Cryptocurrency Category page [coinmarketcap.com/cryptocurrency-category/](https://coinmarketcap.com/cryptocurrency-category/).
  */
 export const getV1CryptocurrencyCategory = <ThrowOnError extends boolean = false>(options: Options<GetV1CryptocurrencyCategoryData, ThrowOnError>) => (options.client ?? client).get<GetV1CryptocurrencyCategoryResponses, GetV1CryptocurrencyCategoryErrors, ThrowOnError>({
@@ -740,7 +740,7 @@ export const getV1ExchangeMap = <ThrowOnError extends boolean = false>(options?:
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 1 minute.
- * **Plan credit use:** 1 call credit per 100 exchanges returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 exchanges returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our latest exchange listing and ranking pages like [coinmarketcap.com/rankings/exchanges/](https://coinmarketcap.com/rankings/exchanges/).
  *
  * ***NOTE:** Use this endpoint if you need a sorted and paginated list of exchanges. If you want to query for market data on a few specific exchanges use /v1/exchange/quotes/latest which is optimized for that purpose. The response data between these endpoints is otherwise the same.*
@@ -769,7 +769,7 @@ export const getV1ExchangeListingsLatest = <ThrowOnError extends boolean = false
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 exchanges returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 exchanges returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Latest market data summary for specific exchanges like [coinmarketcap.com/rankings/exchanges/](https://coinmarketcap.com/rankings/exchanges/).
  *
  * ***NOTE:** “exchange_score" will be deprecated on 4 November 2024.*
@@ -846,7 +846,7 @@ export const getV1ExchangeQuotesHistorical = <ThrowOnError extends boolean = fal
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 market pairs returned (rounded up) and 1 call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 market pairs returned (rounded up) and 1 call credit per `convert` option beyond the first.
  * **CMC equivalent pages:** Our exchange level active markets pages like [coinmarketcap.com/exchanges/binance/](https://coinmarketcap.com/exchanges/binance/).
  */
 export const getV1ExchangeMarketpairsLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV1ExchangeMarketpairsLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV1ExchangeMarketpairsLatestResponses, GetV1ExchangeMarketpairsLatestErrors, ThrowOnError>({
@@ -900,7 +900,7 @@ export const getV1ExchangeAssets = <ThrowOnError extends boolean = false>(option
  * - Enterprise
  *
  * **Cache / Update frequency:** Static data is updated only as needed, every 30 seconds.
- * **Plan credit use:** 1 call credit per 100 exchanges returned (rounded up).
+ * **Plan credit use:** 1 call credit per 250 exchanges returned (rounded up).
  * **CMC equivalent pages:** Exchange detail page metadata like [coinmarketcap.com/exchanges/binance/](https://coinmarketcap.com/exchanges/binance/).
  */
 export const getV1ExchangeInfo = <ThrowOnError extends boolean = false>(options?: Options<GetV1ExchangeInfoData, ThrowOnError>) => (options?.client ?? client).get<GetV1ExchangeInfoResponses, GetV1ExchangeInfoErrors, ThrowOnError>({
@@ -1488,7 +1488,7 @@ export const getV1CryptocurrencyQuotesLatest = <ThrowOnError extends boolean = f
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 exchanges returned (rounded up) and 1 additional call credit per `convert` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 exchanges returned (rounded up) and 1 additional call credit per `convert` option beyond the first.
  */
 export const getV5ExchangeDerivativesList = <ThrowOnError extends boolean = false>(options?: Options<GetV5ExchangeDerivativesListData, ThrowOnError>) => (options?.client ?? client).get<GetV5ExchangeDerivativesListResponses, GetV5ExchangeDerivativesListErrors, ThrowOnError>({
     security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
@@ -1510,6 +1510,7 @@ export const getV5ExchangeDerivativesList = <ThrowOnError extends boolean = fals
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
+ * **Plan credit use:** 1 call credit per 250 market pairs returned (rounded up) and 1 call credit per `convert` option beyond the first.
  */
 export const getV5ExchangeDerivativesMarketPairsListLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV5ExchangeDerivativesMarketPairsListLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV5ExchangeDerivativesMarketPairsListLatestResponses, GetV5ExchangeDerivativesMarketPairsListLatestErrors, ThrowOnError>({
     security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
@@ -1531,6 +1532,7 @@ export const getV5ExchangeDerivativesMarketPairsListLatest = <ThrowOnError exten
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
+ * **Plan credit use:** 1 call credit per 250 market pairs returned (rounded up) and 1 call credit per `convert` option beyond the first.
  */
 export const getV5CryptocurrencyDerivativesMarketPairsListLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV5CryptocurrencyDerivativesMarketPairsListLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV5CryptocurrencyDerivativesMarketPairsListLatestResponses, GetV5CryptocurrencyDerivativesMarketPairsListLatestErrors, ThrowOnError>({
     security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
@@ -1587,7 +1589,7 @@ export const getV5DerivativesLiquidationsQuotesLatest = <ThrowOnError extends bo
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 exchanges returned (rounded up), plus 1 credit per `convert` / `convert_id` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 exchanges returned (rounded up), plus 1 credit per `convert` / `convert_id` option beyond the first.
  * **CMC equivalent page:** [coinmarketcap.com/charts/liquidations/](https://coinmarketcap.com/charts/liquidations/)
  */
 export const getV5DerivativesLiquidationsExchangeListLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV5DerivativesLiquidationsExchangeListLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV5DerivativesLiquidationsExchangeListLatestResponses, GetV5DerivativesLiquidationsExchangeListLatestErrors, ThrowOnError>({
@@ -1614,12 +1616,116 @@ export const getV5DerivativesLiquidationsExchangeListLatest = <ThrowOnError exte
  * - Enterprise
  *
  * **Cache / Update frequency:** Every 60 seconds.
- * **Plan credit use:** 1 call credit per 100 cryptocurrencies returned (rounded up), plus 1 credit per `convert` / `convert_id` option beyond the first.
+ * **Plan credit use:** 1 call credit per 250 cryptocurrencies returned (rounded up), plus 1 credit per `convert` / `convert_id` option beyond the first.
  * **CMC equivalent page:** [coinmarketcap.com/charts/liquidations/](https://coinmarketcap.com/charts/liquidations/)
  */
 export const getV5DerivativesLiquidationsCryptocurrencyListLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV5DerivativesLiquidationsCryptocurrencyListLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV5DerivativesLiquidationsCryptocurrencyListLatestResponses, GetV5DerivativesLiquidationsCryptocurrencyListLatestErrors, ThrowOnError>({
     security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
     url: '/v5/derivatives/liquidations/cryptocurrency/list/latest',
+    ...options
+});
+
+/**
+ * CMC AI Map
+ *
+ * Returns the cryptocurrencies for which CMC AI currently writes Coin Detail Page content. Call this before [/v5/cmc-ai/coins/latest](/pro-api-reference/cmc-ai#coin-insights-latest) when you need to know which coins are covered, and which of those currently have an empty `insights[]`. No answer bodies are returned here.
+ *
+ * Current coverage is the top 100 cryptocurrencies by market cap. The set rotates as the ranking changes. All filters are optional. A filter that matches a coin we do not cover is not an error. That coin is simply absent from `data.coins[]`, and `total_size` reflects the matched count. A param-less call returns the full supported set.
+ *
+ * **This endpoint is available on the following [API plans](https://coinmarketcap.com/api/pricing/):**
+ * - ~~Basic~~
+ * - ~~Builder~~
+ * - ~~Startup~~
+ * - ~~Growth~~
+ * - ~~Professional~~
+ * - Enterprise
+ *
+ * **Cache / Update frequency:** Responses may be up to 1 minute old.
+ * **Plan credit use:** 1 call credit per request. Repeat calls that return the same content are not charged.
+ * **CMC equivalent page:** No equivalent, API only.
+ */
+export const getV5CmcAiCoinsMap = <ThrowOnError extends boolean = false>(options?: Options<GetV5CmcAiCoinsMapData, ThrowOnError>) => (options?.client ?? client).get<GetV5CmcAiCoinsMapResponses, GetV5CmcAiCoinsMapErrors, ThrowOnError>({
+    security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
+    url: '/v5/cmc-ai/coins/map',
+    ...options
+});
+
+/**
+ * Market Feed Latest
+ *
+ * Returns the CMC AI questions, answers, and top news from the CoinMarketCap homepage. Use it when you want a market briefing as structured data in a dashboard, terminal, or research product.
+ *
+ * On the homepage these insights appear as the blue question pills above the cryptocurrency list. Some questions are a fixed template. Others are written for current market conditions and then go away.
+ *
+ * - `fixed_question` is a stable template that stays in the rotation. Examples include "What are the trending narratives?", "Are altcoins outperforming Bitcoin?", and "What is the market sentiment?". The question text does not change. The answer is rewritten as the market moves.
+ * - `trending_question` is a market-dependent question with no fixed template. The question itself appears and disappears with current conditions, for example a one-off prompt about a sudden sector rotation or a catalyst dominating discussion that week.
+ * - `top_news` is a headline plus recap of a current story, for example "BTC stuck near $63K as US spot ETFs see $390M outflows". Headlines change as the news cycle changes.
+ *
+ * This endpoint is market-wide. Coin-specific questions appear as blue pills below the charts on a Coin Detail Page. Use [/v5/cmc-ai/coins/latest](/pro-api-reference/cmc-ai#coin-insights-latest) and [/v5/cmc-ai/coins/map](/pro-api-reference/cmc-ai#cmc-ai-map) for those.
+ *
+ * Refresh cadence:
+ *
+ * - `fixed_question`: about every 30 minutes.
+ * - `trending_question`: about every 30 minutes.
+ * - `top_news`: about every 30 minutes.
+ *
+ * Content is fetched from the database. This endpoint does not generate answers on request. Answers are English only.
+ *
+ * **This endpoint is available on the following [API plans](https://coinmarketcap.com/api/pricing/):**
+ * - ~~Basic~~
+ * - ~~Builder~~
+ * - ~~Startup~~
+ * - ~~Growth~~
+ * - ~~Professional~~
+ * - Enterprise
+ *
+ * **Cache / Update frequency:** Responses may be up to 1 minute old. See the cadence list above for how often content is regenerated.
+ * **Plan credit use:** 1 call credit per request. Repeat calls that return the same content are not charged.
+ * **CMC equivalent page:** The blue question pills above the list on [coinmarketcap.com](https://coinmarketcap.com/).
+ */
+export const getV5CmcAiLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV5CmcAiLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV5CmcAiLatestResponses, GetV5CmcAiLatestErrors, ThrowOnError>({
+    security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
+    url: '/v5/cmc-ai/latest',
+    ...options
+});
+
+/**
+ * Coin Insights Latest
+ *
+ * Returns the CMC AI questions and answers for a cryptocurrency. Use it to attach explainers to any asset you already display, including why the price moved today, what people are saying, what is on the roadmap, and the latest news. Exactly one of `crypto_id`, `slug`, or `symbol` is required; they are mutually exclusive.
+ *
+ * On a Coin Detail Page these insights appear as the blue question pills below the price chart, for example on [coinmarketcap.com/currencies/bitcoin/](https://coinmarketcap.com/currencies/bitcoin/). Some questions are a fixed template for that coin. Others are written for current market conditions and then go away.
+ *
+ * - `fixed_question` is a stable template. Examples include "What is Bitcoin?", "What could affect BTC's future price?", "What is next on BTC's roadmap?", and "What is the latest update in BTC's codebase?". Two templates depend on the day's move: "Why is BTC's price up today?" (`price_up`) or "Why is BTC's price down today?" (`price_down`). Only one of those is shown. A coin never returns both.
+ * - `trending_question` is a market-dependent question about that coin with no fixed template, for example a one-off prompt about a protocol incident or a catalyst unique to that asset.
+ * - `top_news` is a headline tied to the requested coin. These change as the news cycle changes.
+ *
+ * When a requested cryptocurrency is in the coverage set but has no content yet, it is still returned with an empty `insights[]` array rather than an error. Coins skipped by `skip_invalid`, and coins returned with an empty `insights[]`, are not charged. Pagination is over cryptocurrencies, not over individual insights. Coverage is the current top 100 by market cap and is not guaranteed per question. Use [/v5/cmc-ai/coins/map](/pro-api-reference/cmc-ai#cmc-ai-map) first if you need to know which coins currently have coverage. Market-wide homepage questions live on [/v5/cmc-ai/latest](/pro-api-reference/cmc-ai#market-feed-latest).
+ *
+ * Refresh cadence by question:
+ *
+ * - `price_up` and `price_down`: about every 1 hour.
+ * - `future_price`, `sentiment`, and `latest_news`: about every 8 hours.
+ * - `overview`, `roadmap`, and `codebase`: about every 24 hours.
+ * - `trending_question`: about every 24 hours.
+ *
+ * Content is fetched from the database. This endpoint does not generate answers on request. Answers are English only.
+ *
+ * **This endpoint is available on the following [API plans](https://coinmarketcap.com/api/pricing/):**
+ * - ~~Basic~~
+ * - ~~Builder~~
+ * - ~~Startup~~
+ * - ~~Growth~~
+ * - ~~Professional~~
+ * - Enterprise
+ *
+ * **Cache / Update frequency:** Responses may be up to 1 minute old. See the cadence list above for how often each question is regenerated.
+ * **Plan credit use:** 1 call credit per cryptocurrency returned. Skipped coins and empty-insight coins are free. Repeat calls that return the same content for a coin are not charged.
+ * **CMC equivalent page:** The blue question pills below the chart on Coin Detail Pages, e.g. [coinmarketcap.com/currencies/bitcoin/](https://coinmarketcap.com/currencies/bitcoin/).
+ */
+export const getV5CmcAiCoinsLatest = <ThrowOnError extends boolean = false>(options?: Options<GetV5CmcAiCoinsLatestData, ThrowOnError>) => (options?.client ?? client).get<GetV5CmcAiCoinsLatestResponses, GetV5CmcAiCoinsLatestErrors, ThrowOnError>({
+    security: [{ name: 'X-CMC_PRO_API_KEY', type: 'apiKey' }],
+    url: '/v5/cmc-ai/coins/latest',
     ...options
 });
 

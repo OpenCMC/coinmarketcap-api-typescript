@@ -98,6 +98,9 @@ import {
   getV3IndexCmc100Latest,
   getV3IndexCmc20Historical,
   getV3IndexCmc20Latest,
+  getV5CmcAiCoinsLatest,
+  getV5CmcAiCoinsMap,
+  getV5CmcAiLatest,
   getV5CryptocurrencyDerivativesMarketPairsListLatest,
   getV5DerivativesLiquidationsCryptocurrencyListLatest,
   getV5DerivativesLiquidationsExchangeListLatest,
@@ -129,6 +132,15 @@ type OmitClient<T extends (opts: any) => any> =
  */
 export function createNamespaces(client: Client) {
   return {
+    /** CMC AI */
+    cmcAi: {
+      /** GET /v5/cmc-ai/coins/map — CMC AI Map */
+      coinsMap: ((opts: Omit<Parameters<typeof getV5CmcAiCoinsMap>[0], 'client'>) => getV5CmcAiCoinsMap({ ...opts, client })) as OmitClient<typeof getV5CmcAiCoinsMap>,
+      /** GET /v5/cmc-ai/latest — Market Feed Latest */
+      latest: ((opts: Omit<Parameters<typeof getV5CmcAiLatest>[0], 'client'>) => getV5CmcAiLatest({ ...opts, client })) as OmitClient<typeof getV5CmcAiLatest>,
+      /** GET /v5/cmc-ai/coins/latest — Coin Insights Latest */
+      coinsLatest: ((opts: Omit<Parameters<typeof getV5CmcAiCoinsLatest>[0], 'client'>) => getV5CmcAiCoinsLatest({ ...opts, client })) as OmitClient<typeof getV5CmcAiCoinsLatest>,
+    },
     /** CMC Index */
     cmcIndex: {
       /** GET /v3/index/cmc100-historical — CoinMarketCap 100 Index Historical */
