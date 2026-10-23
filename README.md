@@ -246,6 +246,17 @@ import {
 } from "@coinmarketcap/sdk";
 ```
 
+## Versioning
+
+The SDK follows [Semantic Versioning](https://semver.org). A major version removes or
+renames methods, or changes return types or response fields in a way that can break
+existing code. A minor version adds endpoints or fields. A patch version fixes bugs.
+
+The TypeScript (`@coinmarketcap/sdk`) and Python (`coinmarketcap-sdk`) SDKs are released
+together with the same version number. The SDK version is separate from the API's
+endpoint versions (`/v1`, `/v2`, `/v3`). Each [CHANGELOG](./CHANGELOG.md) entry names the
+OpenAPI spec the release was built from and lists its breaking changes.
+
 ## Requirements
 
 - Node.js >= 18

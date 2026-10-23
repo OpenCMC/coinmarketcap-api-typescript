@@ -4,6 +4,166 @@ export type ClientOptions = {
     baseUrl: 'https://pro-api.coinmarketcap.com' | (string & {});
 };
 
+export type V1DexHoldersTrendListResponseModel = {
+    data: Array<HolderTrendVo>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexPlatformListResponseModel = {
+    data: Array<PlatformDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexSecurityDetailResponseModel = {
+    data: Array<TokenSecurityResponseDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokenLiquidityQueryResponseModel = {
+    data: Array<TokenLiquiditySnapshotDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokenPoolsResponseModel = {
+    data: Array<TokenTopPoolDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokenPriceBatchResponseModel = {
+    data: Array<TokenPriceDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokensBatchQueryResponseModel = {
+    data: Array<TokenDetailDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1KLineCandlesResponseModel = {
+    data: Array<Array<number | null>>;
+    status?: ApiStatusObject;
+};
+
+export type V1KLinePointsResponseModel = {
+    data: Array<Array<number>>;
+    status?: ApiStatusObject;
+};
+
+export type V3CryptocurrencyQuotesLatestResponseModel = {
+    data: Array<CryptoQuoteV3Dto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexListingsInfoResponseModel = {
+    data: Array<DexCommonInfoDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexListingsQuotesResponseModel = {
+    data: Array<DexInfoDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexNetworksListResponseModel = {
+    data: Array<NetworkInfoDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexPairsOhlcvHistoricalResponseModel = {
+    data: Array<DexPairsOhlcvHistoricalDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexPairsOhlcvLatestResponseModel = {
+    data: Array<DexPairsOhlcvDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexPairsQuotesLatestResponseModel = {
+    data: Array<DexParisQuotesDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexPairsTradeLatestResponseModel = {
+    data: Array<DexPairsTradeDto>;
+    status?: ApiStatusObject;
+};
+
+export type V4DexSpotPairsLatestResponseModel = {
+    data: Array<DexSpotPairDto>;
+    status?: ApiStatusObject;
+};
+
+export type V1DexGainerLoserListResponseModel = {
+    data: GainerLeaderBoardResponseDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexHoldersCountResponseModel = {
+    data: HolderCountVo;
+    status?: ApiStatusObject;
+};
+
+export type V1DexHoldersDetailResponseModel = {
+    data: HolderDetailVo;
+    status?: ApiStatusObject;
+};
+
+export type V1DexHoldersListResponseModel = {
+    data: HolderDexVo;
+    status?: ApiStatusObject;
+};
+
+export type V1DexHoldersTagCountResponseModel = {
+    data: HolderTagCountVo;
+    status?: ApiStatusObject;
+};
+
+export type V1DexLiquidityChangeListResponseModel = {
+    data: LiquidityChangeListResponseDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexMemeListResponseModel = {
+    data: MemeCoinResponseDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexNewListResponseModel = {
+    data: NewTokenLeaderBoardResponseDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexPlatformDetailResponseModel = {
+    data: PlatformDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexSearchResponseModel = {
+    data: SearchResponseDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokenResponseModel = {
+    data: TokenDetailDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokenPriceResponseModel = {
+    data: TokenPriceDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokensTransactionsResponseModel = {
+    data: SwapListResponseDto;
+    status?: ApiStatusObject;
+};
+
+export type V1DexTokensTrendingListResponseModel = {
+    data: TrendingTokensResponseDto;
+    status?: ApiStatusObject;
+};
+
 /**
  * A canonical source URL for an insight. The only field on a source object.
  */
@@ -773,7 +933,7 @@ export type RwaAssetListResultsObject = {
         /**
          * RWA asset ID; the stable identifier to use across the RWA family.
          */
-        rwa_id?: number;
+        rwa_id?: number | null;
         /**
          * Asset display name.
          */
@@ -797,7 +957,7 @@ export type RwaAssetListResultsObject = {
         /**
          * `true` if at least one token exists for this asset; `false` if there are no tokenized assets.
          */
-        has_tokens?: boolean;
+        has_tokens?: boolean | null;
         /**
          * Aggregate price across the underlying tokens.
          */
@@ -829,15 +989,15 @@ export type RwaAssetListResultsObject = {
             /**
              * Aggregate tokenized price in the converted currency.
              */
-            average_tokenized_price?: number;
+            average_tokenized_price?: number | null;
             /**
              * Aggregate tokenized market cap in the converted currency.
              */
-            tokenized_market_cap?: number;
+            tokenized_market_cap?: number | null;
             /**
              * Aggregate 24h tokenized volume in the converted currency.
              */
-            tokenized_volume_24h?: number;
+            tokenized_volume_24h?: number | null;
             /**
              * ISO 8601 timestamp of the quote.
              */
@@ -940,7 +1100,7 @@ export type RwaMarketPairsResultsObject = {
         /**
          * Quote side of the pair.
          */
-        market_pair_quote?: {
+        market_pair_quotes?: {
             /**
              * Underlying token's CoinMarketCap cryptocurrency ID.
              */
@@ -959,17 +1119,9 @@ export type RwaMarketPairsResultsObject = {
             currency_type?: 'cryptocurrency' | 'fiat';
         };
         /**
-         * Exchange-reported price/volume.
+         * Price and volume as reported directly by the exchange, in the pair's quote currency.
          */
-        exchange_reported_quotes?: Array<{
-            /**
-             * CoinMarketCap ID of the quote currency.
-             */
-            crypto_id?: number;
-            /**
-             * Symbol of the quote currency.
-             */
-            symbol?: string;
+        exchange_reported_quotes?: {
             /**
              * Reported price.
              */
@@ -986,7 +1138,7 @@ export type RwaMarketPairsResultsObject = {
              * ISO 8601 timestamp.
              */
             last_updated?: string;
-        }>;
+        };
         /**
          * Converted price/volume; one object per `convert`/`convert_id` currency.
          */
@@ -1259,7 +1411,7 @@ export type Platform = {
     /**
      * The unique CoinMarketCap ID for the parent platform cryptocurrency.
      */
-    id: number;
+    id: number | string;
     /**
      * The name of the parent platform cryptocurrency.
      */
@@ -1387,7 +1539,7 @@ export type CurrentDay = {
     /**
      * The number of remaining API credits that can be used during the current daily period before receiving a HTTP 429 rate limit error. This limit resets at the end of each daily period.
      */
-    credits_left: number;
+    credits_left?: number;
 };
 
 /**
@@ -1401,7 +1553,7 @@ export type CurrentMonth = {
     /**
      * The number of remaining API credits that can be used during the current monthly period before receiving a HTTP 429 rate limit error. This limit resets at the end of each monthly period.
      */
-    credits_left: number;
+    credits_left?: number;
 };
 
 /**
@@ -1613,11 +1765,11 @@ export type TokenLeaderboardDto = {
     /**
      * Publish timestamp in ms (pubAt)
      */
-    pubAt?: number;
+    pubAt?: string;
     /**
      * Launch timestamp in ms (lchAt)
      */
-    lchAt?: number;
+    lchAt?: string;
     /**
      * Fully Diluted Valuation (fdv)
      */
@@ -1649,7 +1801,7 @@ export type TokenLeaderboardDto = {
     /**
      * Price timestamp (pt)
      */
-    pt?: number;
+    pt?: string;
     /**
      * 24h Volume USD (v24h)
      */
@@ -1740,15 +1892,15 @@ export type TokenStatsDto = {
     /**
      * Total number of transactions
      */
-    txs?: number;
+    txs?: string;
     /**
      * Number of buy transactions
      */
-    nb?: number;
+    nb?: string;
     /**
      * Number of sell transactions
      */
-    ns?: number;
+    ns?: string;
     /**
      * Buy volume
      */
@@ -1760,11 +1912,11 @@ export type TokenStatsDto = {
     /**
      * Number of unique buyers
      */
-    but?: number;
+    but?: string;
     /**
      * Number of unique sellers
      */
-    sut?: number;
+    sut?: string;
     /**
      * Price change rate (e.g. 5.23 means +5.23%)
      */
@@ -1772,7 +1924,7 @@ export type TokenStatsDto = {
     /**
      * Number of unique traders
      */
-    ut?: number;
+    ut?: string;
 };
 
 export type TrendingTokensResponseDto = {
@@ -1943,11 +2095,11 @@ export type TokenDetailDto = {
     /**
      * Token publish timestamp
      */
-    pubAt?: number;
+    pubAt?: string;
     /**
      * Token launched timestamp
      */
-    lchAt?: number;
+    lchAt?: string;
     /**
      * Fully Diluted Valuation
      */
@@ -1979,7 +2131,7 @@ export type TokenDetailDto = {
     /**
      * Holder count
      */
-    hld?: number;
+    hld?: string;
     /**
      * Token price in USD
      */
@@ -1995,15 +2147,15 @@ export type TokenDetailDto = {
     /**
      * Price last updated timestamp
      */
-    pt?: number;
+    pt?: string;
     /**
      * Timestamp of the first time this token had a price
      */
-    fpt?: number;
+    fpt?: string;
     /**
      * Timestamp when the first pool for this token was created
      */
-    fpct?: number;
+    fpct?: string;
     /**
      * Bonding curve ratio
      */
@@ -2023,7 +2175,7 @@ export type TokenDetailDto = {
     /**
      * Number of top pools
      */
-    nps?: number;
+    nps?: string;
     /**
      * Pool source
      */
@@ -2059,7 +2211,7 @@ export type TokenDetailDto = {
     /**
      * Listing token date added
      */
-    ltda?: number;
+    ltda?: string;
     /**
      * Centralized exchange listings
      */
@@ -2090,7 +2242,7 @@ export type TokenTopPoolDto = {
     /**
      * Publish timestamp
      */
-    pubAt?: number;
+    pubAt?: string;
     t0?: Token;
     t1?: Token;
     /**
@@ -2208,11 +2360,19 @@ export type TokenPriceDto = {
     /**
      * Timestamp of price data
      */
-    ts?: number;
+    ts?: string;
     /**
      * Market cap
      */
     mc?: number;
+    /**
+     * Timestamp (Unix milliseconds) of the first time this token had a price.
+     */
+    fpt?: string;
+    /**
+     * Timestamp (Unix milliseconds) when the first pool for this token was created.
+     */
+    fpct?: string;
 };
 
 /**
@@ -2226,7 +2386,7 @@ export type NewTokenLeaderBoardResponseDto = {
     /**
      * Total number of entries matching the filter
      */
-    total?: number;
+    total?: string;
     /**
      * Whether there is another page after this one
      */
@@ -2234,7 +2394,7 @@ export type NewTokenLeaderBoardResponseDto = {
     /**
      * Timestamp (in milliseconds) of the last update
      */
-    lastUpdateTime?: number;
+    lastUpdateTime?: string;
     /**
      * Index to be used for the next page request, if hasNextPage is true
      */
@@ -2392,9 +2552,9 @@ export type MemeCoinFilterDto = {
  * Response object containing categorized meme coin results
  */
 export type MemeCoinResponseDto = {
-    newCreations?: MemeCoinResultDto;
-    aboutGraduates?: MemeCoinResultDto;
-    graduates?: MemeCoinResultDto;
+    newCreations?: Array<MemeCoinResultDto>;
+    aboutGraduates?: Array<MemeCoinResultDto>;
+    graduates?: Array<MemeCoinResultDto>;
 };
 
 /**
@@ -2566,7 +2726,7 @@ export type GainerLeaderBoardResponseDto = {
     /**
      * Total number of matching entries
      */
-    total?: number;
+    total?: string;
     /**
      * Whether there is another page after the current one
      */
@@ -2919,21 +3079,6 @@ export type CryptoOhlcvQuoteDto = {
     time_close?: string;
 };
 
-export type ApiResponseObject = {
-    data?: {
-        [key: string]: unknown;
-    };
-    status?: ResponseStatus;
-};
-
-export type ResponseStatus = {
-    timestamp?: string;
-    error_code?: string;
-    error_message?: string;
-    elapsed?: number;
-    credit_count?: number;
-};
-
 /**
  * A map of market quotes in different currency conversions. The default map included is USD.
  */
@@ -3000,11 +3145,11 @@ export type DexSpotPairDto = {
     /**
      * The id of this base asset in the spot pair.
      */
-    base_asset_id?: string;
+    base_asset_id?: string | null;
     /**
      * The ucid of this base asset in the spot pair.
      */
-    base_asset_ucid?: string;
+    base_asset_ucid?: string | null;
     /**
      * The name of this base asset in the spot pair.
      */
@@ -3020,11 +3165,11 @@ export type DexSpotPairDto = {
     /**
      * The id of this quote asset in the spot pair.
      */
-    quote_asset_id?: string;
+    quote_asset_id?: string | null;
     /**
      * The ucid of this quote asset in the spot pair.
      */
-    quote_asset_ucid?: string;
+    quote_asset_ucid?: string | null;
     /**
      * The name of this quote asset in the spot pair.
      */
@@ -3060,7 +3205,7 @@ export type DexSpotPairDto = {
     /**
      * Timestamp (ISO 8601) when we started tracking this asset.
      */
-    created_at?: string;
+    created_at?: string | null;
     /**
      * Number of transactions in past 24 hours
      */
@@ -3401,7 +3546,7 @@ export type DexParisQuotesDto = {
     /**
      * The id of this base asset in the spot pair.
      */
-    base_asset_id?: string;
+    base_asset_id?: string | null;
     /**
      * The ucid of this base asset in the spot pair.
      */
@@ -3421,7 +3566,7 @@ export type DexParisQuotesDto = {
     /**
      * The id of this quote asset in the spot pair.
      */
-    quote_asset_id?: string;
+    quote_asset_id?: string | null;
     /**
      * The ucid of this quote asset in the spot pair.
      */
@@ -3461,7 +3606,7 @@ export type DexParisQuotesDto = {
     /**
      * Timestamp (ISO 8601) when we started tracking this asset.
      */
-    created_at?: string;
+    created_at?: string | null;
     /**
      * Number of transactions in past 24 hours
      */
@@ -3469,7 +3614,7 @@ export type DexParisQuotesDto = {
     /**
      * Number of holders of the asset
      */
-    holders?: number;
+    holders?: number | null;
     /**
      * Number of asset buys in the past 24 hours
      */
@@ -3481,15 +3626,15 @@ export type DexParisQuotesDto = {
     /**
      * When the pool of the asset was created
      */
-    pool_created?: string;
+    pool_created?: string | null;
     /**
      * Buy tax on the asset
      */
-    buy_tax?: number;
+    buy_tax?: number | null;
     /**
      * Sell tax on the asset
      */
-    sell_tax?: number;
+    sell_tax?: number | null;
     /**
      * Security scan by Go+.
      *
@@ -3500,7 +3645,7 @@ export type DexParisQuotesDto = {
      *
      * Only returned if passed in aux.
      */
-    security_scan?: Array<SecurityScanResult>;
+    security_scan?: Array<SecurityScanResult> | null;
     /**
      * Base asset in the pool
      */
@@ -3512,7 +3657,7 @@ export type DexParisQuotesDto = {
     /**
      * Percentage of the base asset in the pool
      */
-    percent_pooled_base_asset?: number;
+    percent_pooled_base_asset?: number | null;
     /**
      * 24 hours volume of the quote asset
      */
@@ -3520,11 +3665,11 @@ export type DexParisQuotesDto = {
     /**
      * Total supply of the quote asset
      */
-    total_supply_quote_asset?: number;
+    total_supply_quote_asset?: number | null;
     /**
      * Total supply of the quote asset
      */
-    total_supply_base_asset?: number;
+    total_supply_base_asset?: number | null;
     /**
      * Timestamp (ISO 8601) of the launch date for this exchange.
      */
@@ -4320,7 +4465,7 @@ export type CryptoQuoteV3Dto = {
     name?: string;
     symbol?: string;
     slug?: string;
-    platform?: Platform2;
+    platform?: Platform2 | null;
     quote?: Array<Quote>;
     tags?: Array<CryptoTag>;
     is_active?: number;
@@ -4338,7 +4483,7 @@ export type CryptoQuoteV3Dto = {
     /**
      * Maximum supply of the cryptocurrency
      */
-    max_supply?: number;
+    max_supply?: number | null;
     date_added?: string;
     num_market_pairs?: number;
     cmc_rank?: number;
@@ -4346,15 +4491,15 @@ export type CryptoQuoteV3Dto = {
     /**
      * TVL to market cap ratio
      */
-    tvl_ratio?: number;
+    tvl_ratio?: number | null;
     /**
      * Self-reported circulating supply
      */
-    self_reported_circulating_supply?: number;
+    self_reported_circulating_supply?: number | null;
     /**
      * Self-reported market capitalization
      */
-    self_reported_market_cap?: number;
+    self_reported_market_cap?: number | null;
     /**
      * Unlocked circulating supply
      */
@@ -4363,6 +4508,10 @@ export type CryptoQuoteV3Dto = {
      * Unlocked market capitalization
      */
     unlocked_market_cap?: number;
+    /**
+     * Market cap calculated from the minted supply, in the requested currency.
+     */
+    minted_market_cap?: number;
 };
 
 export type CryptoTag = {
@@ -4471,7 +4620,7 @@ export type Quote = {
     /**
      * Total Value Locked
      */
-    tvl?: number;
+    tvl?: number | null;
     /**
      * Market cap calculated by total supply
      */
@@ -4487,7 +4636,7 @@ export type CryptoListingDto = {
     name?: string;
     symbol?: string;
     slug?: string;
-    platform?: Platform2;
+    platform?: Platform2 | null;
     quote?: Array<Quote>;
     tags?: Array<string>;
     is_active?: number;
@@ -4505,7 +4654,7 @@ export type CryptoListingDto = {
     /**
      * Maximum supply of the cryptocurrency
      */
-    max_supply?: number;
+    max_supply?: number | null;
     date_added?: string;
     num_market_pairs?: number;
     cmc_rank?: number;
@@ -4513,7 +4662,7 @@ export type CryptoListingDto = {
     /**
      * TVL to market cap ratio
      */
-    tvl_ratio?: number;
+    tvl_ratio?: number | null;
     /**
      * Self-reported circulating supply
      */
@@ -4577,7 +4726,7 @@ export type TradeHistoryDto = {
     /**
      * Transaction time (timestamp)
      */
-    ts?: number;
+    ts?: string;
     /**
      * Transaction type (buy/sell)
      */
@@ -4657,15 +4806,15 @@ export type TradeHistoryDto = {
     /**
      * height
      */
-    h?: number;
+    h?: string;
     /**
      * txId
      */
-    txId?: number;
+    txId?: string;
     /**
      * Log ID
      */
-    lgid?: number;
+    lgid?: string;
     /**
      * t0top
      */
@@ -4681,7 +4830,7 @@ export type TradeHistoryDto = {
     /**
      * transaction count
      */
-    tc?: number;
+    tc?: string;
     /**
      * kol name
      */
@@ -4855,8 +5004,8 @@ export type SearchResultDto = {
     n?: string;
     s?: string;
     addr?: string;
-    pt?: number;
-    lt?: number;
+    pt?: string;
+    lt?: string;
     w?: string;
     x?: string;
     l?: string;
@@ -4864,17 +5013,17 @@ export type SearchResultDto = {
     pc24h?: number;
     dec?: number;
     tsup?: string;
-    fpt?: number;
-    fpct?: number;
+    fpt?: string;
+    fpct?: string;
     v24h?: number;
     fdv?: number;
     mc?: number;
     liq?: number;
-    ts?: number;
+    ts?: string;
     lf?: number;
     cid?: number;
     bnCid?: string;
-    ut24h?: number;
+    ut24h?: string;
     /**
      * Binance exclusive code, 1 - exclusive
      */
@@ -4954,13 +5103,17 @@ export type PlatformDto = {
      */
     pltA?: string;
     cid?: number;
+    /**
+     * Address used for this platform's native coin, for example `0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee` on EVM chains.
+     */
+    na?: string;
 };
 
 /**
  * List of liquidity change transactions
  */
 export type LiquidityChangeDto = {
-    ts?: number;
+    ts?: string;
     tp?: string;
     /**
      * exchange id
@@ -4989,9 +5142,9 @@ export type LiquidityChangeDto = {
     tu?: number;
     m?: string;
     txn?: string;
-    h?: number;
-    txId?: number;
-    lgid?: number;
+    h?: string;
+    txId?: string;
+    lgid?: string;
 };
 
 /**
@@ -5013,7 +5166,7 @@ export type LiquidityChangeListResponseDto = {
     /**
      * liquidity pool count
      */
-    lpc?: number;
+    lpc?: string;
 };
 
 /**
@@ -5058,13 +5211,13 @@ export type DqueryHoldersRequestDto = {
 
 export type HolderCountVo = {
     platformId?: number;
-    count?: number;
+    count?: string;
     tokenAddress?: string;
 };
 
 export type HolderDetailVo = {
-    blockHeight?: number;
-    firstActiveTime?: number;
+    blockHeight?: string;
+    firstActiveTime?: string;
     netBuyAmount?: string;
     realizedPnlPercent?: string;
     spotPosition?: string;
@@ -5094,11 +5247,11 @@ export type HolderDetailVo = {
     symbol?: string;
     nativeBalance?: string;
     fundingSource?: string;
-    fundingTime?: number;
-    lastActiveTime?: number;
+    fundingTime?: string;
+    lastActiveTime?: string;
     walletCreateTime?: number;
-    spotOpenTs?: number;
-    spotClearanceTs?: number;
+    spotOpenTs?: string;
+    spotClearanceTs?: string;
     tokenLogo?: string;
     tokenSymbol?: string;
     platformCryptoId?: number;
@@ -5128,18 +5281,18 @@ export type HolderTagItem = {
 };
 
 export type HolderTrendVo = {
-    ts?: number;
-    endTs?: number;
+    ts?: string;
+    endTs?: string;
     platform?: number;
     tokenAddress?: string;
-    holders?: number;
+    holders?: string;
     holdingRatioOfTop100?: string;
     holdingRatioOfTop50?: string;
     holdingRatioOfTop10?: string;
     totalBalanceOfTop100?: string;
     totalBalanceOfTop50?: string;
     totalBalanceOfTop10?: string;
-    biggerThan10DHolders?: number;
+    biggerThan10DHolders?: string;
     avgBalanceAllHolders?: string;
     avgBalanceOfTop100?: string;
     avgPositionCostOfTop100?: string;
@@ -5153,55 +5306,24 @@ export type HolderTrendVo = {
 
 export type ApiResponseOfIndexHistoricalResponseDto = {
     data?: IndexHistoricalDpsDto;
-    status?: ProApiResponseStatus;
+    status?: ApiStatusObject;
 };
 
 export type ApiResponseOfIndexLatestResponseDto = {
     data: IndexLatestDto;
-    status?: ProApiResponseStatus;
+    status?: ApiStatusObject;
 };
 
 export type IndexHistoricalDpsDto = Array<IndexHistoricalDto>;
 
-export type ProApiResponseStatus = {
-    /**
-     * Number of credits used for the request
-     */
-    credit_count?: number;
-    /**
-     * Time taken to process the request
-     */
-    elapsed?: number;
-    /**
-     * Error code of the response
-     */
-    error_code?: string;
-    /**
-     * Error message of the response, if any
-     */
-    error_message?: string;
-    /**
-     * Api notice message of the response
-     */
-    notice?: string;
-    /**
-     * Timestamp of the response
-     */
-    timestamp?: string;
-    /**
-     * Number of data size
-     */
-    total_count?: number;
-};
-
 export type ApiResponseOfCmc20IndexHistoricalResponseDto = {
     data?: Cmc20IndexHistoricalDpsDto;
-    status?: ProApiResponseStatus;
+    status?: ApiStatusObject;
 };
 
 export type ApiResponseOfCmc20IndexLatestResponseDto = {
     data: Cmc20IndexLatestDto;
-    status?: ProApiResponseStatus;
+    status?: ApiStatusObject;
 };
 
 export type Cmc20IndexDetailDto = {
@@ -5294,6 +5416,14 @@ export type Model1 = {
      * Timestamp (ISO 8601) of the time this was released.
      */
     released_at?: string;
+    /**
+     * Language code of this content item, for example `en`.
+     */
+    language?: string;
+    /**
+     * Type of this content item, for example `news`. Matches the `news_type` filter.
+     */
+    news_type?: string;
 };
 
 /**
@@ -5310,9 +5440,9 @@ export type ApiStatusObject = {
      */
     timestamp: string;
     /**
-     * An internal error code for the current error. If a unique platform error code is not available the HTTP status code is returned. `null` is returned if there is no error.
+     * An internal error code for the current error. If a unique platform error code is not available the HTTP status code is returned. `0` is returned if there is no error. Some endpoints return this code as a string, for example `"0"`.
      */
-    error_code: number;
+    error_code: number | string;
     /**
      * An error message to go along with the error code.
      */
@@ -5329,6 +5459,10 @@ export type ApiStatusObject = {
      * Optional notice about API key information.
      */
     notice?: string | null;
+    /**
+     * Total number of results available for this request. Only returned by some list endpoints.
+     */
+    total_count?: number;
 };
 
 export type ContentLatestResponseModel = {
@@ -5492,7 +5626,7 @@ export type AirdropAirdropObject = {
      * Timestamp (ISO 8601) of when this cryptocurrency was added to CoinMarketCap.
      */
     end_date: string;
-    total_prize?: number;
+    total_prize?: string;
     winner_count?: number;
     /**
      * A link to the airdrop information.
@@ -5500,15 +5634,8 @@ export type AirdropAirdropObject = {
     link?: string;
 };
 
-/**
- * Results of your query returned as an object map.
- */
-export type AirdropResultsMap = {
-    [key: string]: AirdropAirdropObject;
-};
-
 export type AirdropResponseModel = {
-    data: AirdropResultsMap;
+    data: AirdropAirdropObject;
     status?: ApiStatusObject;
 };
 
@@ -5541,7 +5668,7 @@ export type AirdropsAirdropObject = {
      * Timestamp (ISO 8601) of when this cryptocurrency was added to CoinMarketCap.
      */
     end_date: string;
-    total_prize?: number;
+    total_prize?: string;
     winner_count?: number;
     /**
      * A link to the airdrop information.
@@ -5623,11 +5750,11 @@ export type CryptocurrencyQuoteObject = {
     /**
      * Price in the specified currency for this historical.
      */
-    price: number;
+    price: number | null;
     /**
      * Rolling 24 hour adjusted volume in the specified currency.
      */
-    volume_24h: number;
+    volume_24h: number | null;
     /**
      * Rolling 24 hour reported volume in the specified currency. *This field is only returned if requested through the `aux` request parameter.*
      */
@@ -5651,23 +5778,59 @@ export type CryptocurrencyQuoteObject = {
     /**
      * Market cap in the specified currency.
      */
-    market_cap: number;
+    market_cap: number | null;
     /**
      * 1 hour change in the specified currency.
      */
-    percent_change_1h: number;
+    percent_change_1h: number | null;
     /**
      * 24 hour change in the specified currency.
      */
-    percent_change_24h: number;
+    percent_change_24h: number | null;
     /**
      * 7 day change in the specified currency.
      */
-    percent_change_7d: number;
+    percent_change_7d: number | null;
     /**
      * Timestamp (ISO 8601) of when the conversion currency's current value was referenced.
      */
     last_updated: string;
+    /**
+     * 24 hour trading volume from centralized exchanges in the requested currency.
+     */
+    cex_volume_24h?: number;
+    /**
+     * 24 hour trading volume from decentralized exchanges in the requested currency.
+     */
+    dex_volume_24h?: number;
+    /**
+     * 24 hour change in trading volume, as a percentage.
+     */
+    volume_change_24h?: number | null;
+    /**
+     * 30 day price change as a percentage.
+     */
+    percent_change_30d?: number | null;
+    /**
+     * 60 day price change as a percentage.
+     */
+    percent_change_60d?: number | null;
+    /**
+     * 90 day price change as a percentage.
+     */
+    percent_change_90d?: number | null;
+    /**
+     * This cryptocurrency's share of the total cryptocurrency market cap, as a percentage.
+     */
+    market_cap_dominance?: number | null;
+    /**
+     * Fully diluted market cap in the requested currency.
+     */
+    fully_diluted_market_cap?: number | null;
+    /**
+     * Total value locked in the requested currency. `null` when TVL is not available.
+     */
+    tvl?: number | null;
 };
 
 /**
@@ -5700,7 +5863,7 @@ export type CryptocurrencyCryptocurrencyObject = {
     /**
      * The cryptocurrency's CoinMarketCap rank by market cap.
      */
-    cmc_rank?: number;
+    cmc_rank?: number | null;
     /**
      * The number of active trading pairs available for this cryptocurrency across supported exchanges.
      */
@@ -5720,11 +5883,11 @@ export type CryptocurrencyCryptocurrencyObject = {
     /**
      * The expected maximum limit of coins ever to be available for this cryptocurrency.
      */
-    max_supply?: number;
+    max_supply?: number | null;
     /**
      * Timestamp (ISO 8601) of the last time this cryptocurrency's market data was updated.
      */
-    last_updated: string;
+    last_updated?: string;
     /**
      * Timestamp (ISO 8601) of when this cryptocurrency was added to CoinMarketCap.
      */
@@ -5732,6 +5895,34 @@ export type CryptocurrencyCryptocurrencyObject = {
     tags?: Tags;
     platform?: Platform;
     quote: CryptocurrencyQuoteMap;
+    /**
+     * 1 if this cryptocurrency has at least 1 active market currently being tracked by the platform, otherwise 0.
+     */
+    is_active?: number;
+    /**
+     * Whether this cryptocurrency is known to have an infinite supply.
+     */
+    infinite_supply?: boolean;
+    /**
+     * 1 if this is a fiat currency, otherwise 0.
+     */
+    is_fiat?: number;
+    /**
+     * Ratio of total value locked to market cap. `null` when TVL is not available.
+     */
+    tvl_ratio?: number | null;
+    /**
+     * The circulating supply reported by the project team. `null` when not reported.
+     */
+    self_reported_circulating_supply?: number | null;
+    /**
+     * The market cap based on the self-reported circulating supply. `null` when not reported.
+     */
+    self_reported_market_cap?: number | null;
+    /**
+     * Market cap calculated from the minted supply, in the requested currency.
+     */
+    minted_market_cap?: number;
 };
 
 /**
@@ -5787,15 +5978,8 @@ export type CategoryCryptocurrencyObject = {
     last_updated: string;
 };
 
-/**
- * Results of your query returned as an object map.
- */
-export type CategoryResultsMap = {
-    [key: string]: CategoryCryptocurrencyObject;
-};
-
 export type CategoryResponseModel = {
-    data: CategoryResultsMap;
+    data: CategoryCryptocurrencyObject;
     status?: ApiStatusObject;
 };
 
@@ -5817,6 +6001,10 @@ export type CryptocurrenciesInfoUrLsObject = {
     announcement: Announcement;
     reddit: Reddit;
     twitter: Twitter;
+    /**
+     * Facebook links for this cryptocurrency.
+     */
+    facebook?: Array<string>;
 };
 
 /**
@@ -5858,12 +6046,12 @@ export type CryptocurrenciesInfoCryptocurrencyObjectPleaseNoteThisWillBeWrappedI
     /**
      * Timestamp (ISO 8601) of when this cryptocurrency was launched.
      */
-    date_launched: string;
+    date_launched?: string;
     /**
      * A [Markdown](https://commonmark.org/help/) formatted notice that may highlight a significant event or condition that is impacting the cryptocurrency or how it is displayed, otherwise null. A notice may highlight a recent or upcoming mainnet swap, symbol change, exploit event, or known issue with a particular exchange or market, for example. If present, this notice is also displayed in an alert banner at the top of the cryptocurrency's page on coinmarketcap.com.
      */
     notice?: string;
-    tags: Tags1;
+    tags: Tags1 | null;
     platform: Platform;
     /**
      * The self reported number of coins circulating for this cryptocurrency.
@@ -5879,13 +6067,68 @@ export type CryptocurrenciesInfoCryptocurrencyObjectPleaseNoteThisWillBeWrappedI
      */
     infinite_supply?: boolean;
     urls: CryptocurrenciesInfoUrLsObject;
+    /**
+     * Name of the project's subreddit, if any.
+     */
+    subreddit?: string;
+    /**
+     * The project's X (Twitter) username, if any.
+     */
+    twitter_username?: string;
+    /**
+     * Names of the tags in `tags`, in the same order.
+     */
+    'tag-names'?: Array<string> | null;
+    /**
+     * Group of each tag in `tags`, in the same order. For example `ALGORITHM`, `CATEGORY` or `PLATFORM`.
+     */
+    'tag-groups'?: Array<string> | null;
+    /**
+     * Contract addresses of this cryptocurrency on each platform it is deployed on.
+     */
+    contract_address?: Array<{
+        /**
+         * Token contract address on this platform.
+         */
+        contract_address?: string;
+        /**
+         * The platform this contract address belongs to.
+         */
+        platform?: {
+            /**
+             * Platform name.
+             */
+            name?: string;
+            /**
+             * The platform's native cryptocurrency.
+             */
+            coin?: {
+                /**
+                 * CoinMarketCap ID of the platform's native cryptocurrency.
+                 */
+                id?: string;
+                /**
+                 * Name of the platform's native cryptocurrency.
+                 */
+                name?: string;
+                /**
+                 * Symbol of the platform's native cryptocurrency.
+                 */
+                symbol?: string;
+                /**
+                 * URL-friendly slug of the platform's native cryptocurrency.
+                 */
+                slug?: string;
+            };
+        };
+    }>;
 };
 
 /**
  * Results of your query returned as an object map.
  */
 export type CryptocurrencyInfoResultsMap = {
-    [key: string]: CryptocurrenciesInfoCryptocurrencyObjectPleaseNoteThisWillBeWrappedInAnArrayIfYouRequestBySymbolUsingTheV2Endpoint;
+    [key: string]: CryptocurrenciesInfoCryptocurrencyObjectPleaseNoteThisWillBeWrappedInAnArrayIfYouRequestBySymbolUsingTheV2Endpoint | Array<CryptocurrenciesInfoCryptocurrencyObjectPleaseNoteThisWillBeWrappedInAnArrayIfYouRequestBySymbolUsingTheV2Endpoint>;
 };
 
 export type CryptocurrenciesInfoResponseModel = {
@@ -6022,6 +6265,14 @@ export type ExchangesInfoUrLsObject = {
     chat: Chat1;
     fee: Fee;
     twitter: Twitter1;
+    /**
+     * Links to the exchange's main trading website.
+     */
+    actual?: Array<string>;
+    /**
+     * Links to the exchange's sign-up page.
+     */
+    register?: Array<string>;
 };
 
 /**
@@ -6055,7 +6306,7 @@ export type ExchangesInfoExchangeInfoObject = {
     /**
      * A [Markdown](https://commonmark.org/help/) formatted message outlining a condition that is impacting the availability of the exchange's market data or the secure use of the exchange, otherwise null. This may include a maintenance event on the exchange's end or CoinMarketCap's end, an alert about reported issues with withdrawls from this exchange, or another condition that may be impacting the exchange and it's markets. If present, this notice is also displayed in an alert banner at the top of the exchange's page on coinmarketcap.com.
      */
-    notice: string;
+    notice: string | null;
     /**
      * The number of weekly visitors.
      */
@@ -6065,6 +6316,58 @@ export type ExchangesInfoExchangeInfoObject = {
      */
     spot_volume_usd?: number;
     urls: ExchangesInfoUrLsObject;
+    /**
+     * Countries this exchange operates in. `GLOBAL` means no specific country.
+     */
+    countries?: Array<string>;
+    /**
+     * Fiat currencies accepted by this exchange.
+     */
+    fiats?: Array<string>;
+    /**
+     * Maker fee charged by this exchange, as a percentage.
+     */
+    maker_fee?: number;
+    /**
+     * Taker fee charged by this exchange, as a percentage.
+     */
+    taker_fee?: number;
+    /**
+     * Timestamp (ISO 8601) of the last update to `spot_volume_usd`.
+     */
+    spot_volume_last_updated?: string;
+    /**
+     * 1 if this exchange's data can be redistributed, otherwise 0.
+     */
+    is_redistributable?: number;
+    /**
+     * Comma-separated fiat currencies you can deposit directly (for example by bank transfer).
+     */
+    on_ramp_direct_deposit?: string;
+    /**
+     * Comma-separated fiat currencies you can use to buy crypto with a Visa or Mastercard card.
+     */
+    on_ramp_card_visa_mastercard?: string;
+    /**
+     * Comma-separated fiat currencies you can use to buy crypto with Google Pay or Apple Pay.
+     */
+    on_ramp_google_apple_pay?: string;
+    /**
+     * Comma-separated fiat currencies you can use to buy crypto through third-party payment providers.
+     */
+    on_ramp_third_party?: string;
+    /**
+     * Comma-separated fiat currencies you can use to buy crypto through peer-to-peer trading.
+     */
+    on_ramp_p2p?: string;
+    /**
+     * Comma-separated fiat currencies you can withdraw directly (for example by bank transfer).
+     */
+    off_ramp_direct_withdrawal?: string;
+    /**
+     * Comma-separated fiat currencies you can sell crypto for through peer-to-peer trading.
+     */
+    off_ramp_p2p?: string;
 };
 
 /**
@@ -6111,6 +6414,14 @@ export type ExchangeMapExchangeObject = {
      * Timestamp (ISO 8601) of the latest market data record available to query using our historical endpoints. `null` if there is no historical data currently available for this exchange.
      */
     last_historical_data?: string;
+    /**
+     * 1 if this exchange is currently listed on CoinMarketCap, otherwise 0.
+     */
+    is_listed?: number;
+    /**
+     * 1 if this exchange's data can be redistributed, otherwise 0.
+     */
+    is_redistributable?: number;
 };
 
 /**
@@ -6311,7 +6622,7 @@ export type BlockchainStatisticsLatestBlockchainObject = {
     /**
      * The reward assigned to the miner of a block excluding fees.
      */
-    block_reward_static: number;
+    block_reward_static: string;
     /**
      * The consensus mechanism used by the blockchain, for example, "proof-of-work" or "proof-of-stake".
      */
@@ -6327,7 +6638,7 @@ export type BlockchainStatisticsLatestBlockchainObject = {
     /**
      * The number of pending transactions.
      */
-    pending_transactions: number;
+    pending_transactions: string;
     /**
      * The rate the block reward is adjusted at a specified interval.
      */
@@ -6335,7 +6646,7 @@ export type BlockchainStatisticsLatestBlockchainObject = {
     /**
      * The total number of blocks.
      */
-    total_blocks: number;
+    total_blocks: string;
     /**
      * The total number of transactions. *Note: This integer is returned as a string to use with BigInt libraries as it may exceed the max safe integer size for many programming languages.*
      */
@@ -6343,7 +6654,7 @@ export type BlockchainStatisticsLatestBlockchainObject = {
     /**
      * The average transactions per second over the past 24 hours.
      */
-    tps_24h: number;
+    tps_24h: string;
     /**
      * Timestamp (ISO 8601) of the time the first block was mined on this chain.
      */
@@ -6396,6 +6707,7 @@ export type CommunityTrendingTokenResults = Array<CommunityTrendingTokenResultsO
 
 export type CommunityTrendingTokenResponseModel = {
     data: CommunityTrendingTokenResults;
+    status?: ApiStatusObject;
 };
 
 /**
@@ -6413,7 +6725,8 @@ export type CommunityTrendingTopicResults = {
 };
 
 export type CommunityTrendingTopicResponseModel = {
-    data: CommunityTrendingTopicResults;
+    data: Array<CommunityTrendingTopicResults>;
+    status?: ApiStatusObject;
 };
 
 export type Model2 = {
@@ -6445,6 +6758,10 @@ export type Model3 = {
     id?: number;
     symbol?: string;
     slug?: string;
+    /**
+     * Type of this asset, for example `crypto`.
+     */
+    assetType?: string;
 };
 
 export type Model4 = {
@@ -6473,6 +6790,7 @@ export type ContentTopPostsResults = {
 
 export type ContentLatestPostsResponseModel = {
     data: ContentTopPostsResults;
+    status?: ApiStatusObject;
 };
 
 export type ContentTopPostsResponseModel = {
@@ -6560,7 +6878,7 @@ export type CryptocurrencyListingsLatestCryptocurrencyObject = {
     /**
      * The expected maximum limit of coins ever to be available for this cryptocurrency.
      */
-    max_supply: number;
+    max_supply?: number;
     /**
      * Timestamp (ISO 8601) of when this cryptocurrency's market data was referenced for this UTC date snapshot. This is always the last update available during the UTC date requested.
      */
@@ -6572,6 +6890,22 @@ export type CryptocurrencyListingsLatestCryptocurrencyObject = {
     tags: Tags;
     platform: Platform;
     quote: CryptocurrencyListingsLatestQuoteMap;
+    /**
+     * Whether this cryptocurrency is known to have an infinite supply.
+     */
+    infinite_supply?: boolean;
+    /**
+     * The circulating supply reported by the project team. `null` when not reported.
+     */
+    self_reported_circulating_supply?: number | null;
+    /**
+     * The market cap based on the self-reported circulating supply. `null` when not reported.
+     */
+    self_reported_market_cap?: number | null;
+    /**
+     * Ratio of total value locked to market cap. `null` when TVL is not available.
+     */
+    tvl_ratio?: number | null;
 };
 
 /**
@@ -6635,7 +6969,7 @@ export type CryptocurrencyListingsLatestQuoteObject1 = {
     /**
      * Total Value Locked
      */
-    tvl?: number;
+    tvl?: number | null;
     /**
      * 1 hour change in the specified currency.
      */
@@ -6652,6 +6986,26 @@ export type CryptocurrencyListingsLatestQuoteObject1 = {
      * Timestamp (ISO 8601) of when the conversion currency's current value was referenced.
      */
     last_updated: string;
+    /**
+     * 24 hour trading volume from centralized exchanges in the requested currency.
+     */
+    cex_volume_24h?: number;
+    /**
+     * 24 hour trading volume from decentralized exchanges in the requested currency.
+     */
+    dex_volume_24h?: number;
+    /**
+     * 30 day price change as a percentage.
+     */
+    percent_change_30d?: number;
+    /**
+     * 60 day price change as a percentage.
+     */
+    percent_change_60d?: number;
+    /**
+     * 90 day price change as a percentage.
+     */
+    percent_change_90d?: number;
 };
 
 /**
@@ -6704,7 +7058,7 @@ export type CryptocurrencyListingsLatestCryptocurrencyObject1 = {
     /**
      * The expected maximum limit of coins ever to be available for this cryptocurrency.
      */
-    max_supply?: number;
+    max_supply?: number | null;
     /**
      * The cryptocurrency is known to have an infinite supply.
      */
@@ -6729,7 +7083,7 @@ export type CryptocurrencyListingsLatestCryptocurrencyObject1 = {
     /**
      * Percentage of Total Value Locked
      */
-    tvl_ratio?: number;
+    tvl_ratio?: number | null;
     platform?: Platform;
     /**
      * The minted market cap for this cryptocurrency.
@@ -6812,6 +7166,30 @@ export type CryptocurrencyListingsLatestQuoteObject2 = {
      * Timestamp (ISO 8601) of when the conversion currency's current value was referenced.
      */
     last_updated: string;
+    /**
+     * 24 hour trading volume from centralized exchanges in the requested currency.
+     */
+    cex_volume_24h?: number;
+    /**
+     * 24 hour trading volume from decentralized exchanges in the requested currency.
+     */
+    dex_volume_24h?: number;
+    /**
+     * 30 day price change as a percentage.
+     */
+    percent_change_30d?: number;
+    /**
+     * 60 day price change as a percentage.
+     */
+    percent_change_60d?: number;
+    /**
+     * 90 day price change as a percentage.
+     */
+    percent_change_90d?: number;
+    /**
+     * Total value locked in the requested currency. `null` when TVL is not available.
+     */
+    tvl?: number | null;
 };
 
 /**
@@ -6864,7 +7242,7 @@ export type CryptocurrencyListingsLatestCryptocurrencyObject2 = {
     /**
      * The expected maximum limit of coins ever to be available for this cryptocurrency.
      */
-    max_supply?: number;
+    max_supply?: number | null;
     /**
      * Timestamp (ISO 8601) of the last time this cryptocurrency's market data was updated.
      */
@@ -6880,6 +7258,30 @@ export type CryptocurrencyListingsLatestCryptocurrencyObject2 = {
      */
     minted_market_cap?: number;
     quote: CryptocurrencyListingsLatestQuoteMap2;
+    /**
+     * 1 if this cryptocurrency has at least 1 active market currently being tracked by the platform, otherwise 0.
+     */
+    is_active?: number;
+    /**
+     * Whether this cryptocurrency is known to have an infinite supply.
+     */
+    infinite_supply?: boolean;
+    /**
+     * 1 if this is a fiat currency, otherwise 0.
+     */
+    is_fiat?: number;
+    /**
+     * Ratio of total value locked to market cap. `null` when TVL is not available.
+     */
+    tvl_ratio?: number | null;
+    /**
+     * The circulating supply reported by the project team. `null` when not reported.
+     */
+    self_reported_circulating_supply?: number | null;
+    /**
+     * The market cap based on the self-reported circulating supply. `null` when not reported.
+     */
+    self_reported_market_cap?: number | null;
 };
 
 /**
@@ -7057,6 +7459,14 @@ export type CryptocurrencyMarketPairsLatestMarketPairInfoObject = {
     quote: CryptocurrencyMarketPairsLatestMarketPairQuoteObject;
     market_pair_base: CryptocurrencyMarketPairsLatestPairBaseCurrencyInfoObject;
     market_pair_quote: CryptocurrencyMarketPairsLatestPairBaseCurrencyInfoObject1;
+    /**
+     * 1 if this market pair has been flagged as an outlier, otherwise 0.
+     */
+    outlier_detected?: number;
+    /**
+     * Reasons this market pair is excluded from aggregate calculations, if any.
+     */
+    exclusions?: Array<string> | null;
 };
 
 /**
@@ -7181,7 +7591,12 @@ export type CryptocurrencyOhlcvHistoricalResultsObject = {
 };
 
 export type CryptocurrencyOhlcvHistoricalResponseModel = {
-    data: CryptocurrencyOhlcvHistoricalResultsObject;
+    /**
+     * A single object when you request one cryptocurrency, and an object map keyed by cryptocurrency ID when you request several.
+     */
+    data: {
+        [key: string]: CryptocurrencyOhlcvHistoricalResultsObject;
+    } | CryptocurrencyOhlcvHistoricalResultsObject;
     status?: ApiStatusObject;
 };
 
@@ -7257,7 +7672,7 @@ export type CryptocurrencyOhlcvLatestCryptocurrencyObject = {
     /**
      * Timestamp (ISO 8601) of the end of this OHLCV period. Always `null` as the current day is incomplete. See `last_updated` for the last UTC time included in the current OHLCV calculation.
      */
-    time_close: string;
+    time_close: string | null;
     quote: CryptocurrencyOhlcvLatestQuoteMap;
 };
 
@@ -7406,7 +7821,7 @@ export type CryptocurrencyQuotesHistoricalCurrencyQuoteObject = {
     /**
      * Aggregate 24 hour adjusted volume for all market pairs tracked for this cryptocurrency at the current historical interval.
      */
-    volume_24hr: number;
+    volume_24h: number;
     /**
      * Number of market pairs available at the current historical interval.
      */
@@ -7415,6 +7830,30 @@ export type CryptocurrencyQuotesHistoricalCurrencyQuoteObject = {
      * Timestamp (ISO 8601) of when the conversion currency's current value was referenced for this conversion.
      */
     timestamp: string;
+    /**
+     * 1 hour price change as a percentage, at the time of this quote.
+     */
+    percent_change_1h?: number;
+    /**
+     * 24 hour price change as a percentage, at the time of this quote.
+     */
+    percent_change_24h?: number;
+    /**
+     * 7 day price change as a percentage, at the time of this quote.
+     */
+    percent_change_7d?: number;
+    /**
+     * 30 day price change as a percentage, at the time of this quote.
+     */
+    percent_change_30d?: number;
+    /**
+     * Circulating supply at the time of this quote.
+     */
+    circulating_supply?: number;
+    /**
+     * Total supply at the time of this quote.
+     */
+    total_supply?: number;
 };
 
 /**
@@ -7479,7 +7918,10 @@ export type CryptocurrencyQuotesHistoricalResultsMap = {
 };
 
 export type CryptocurrencyQuotesHistoricalResponseModel = {
-    data: CryptocurrencyQuotesHistoricalResultsMap;
+    /**
+     * The v3 endpoint always returns an object map keyed by cryptocurrency ID. The v1 and v2 endpoints return a single object when you request one cryptocurrency, and an object map keyed by ID when you request several.
+     */
+    data: CryptocurrencyQuotesHistoricalResultsMap | CryptocurrencyQuotesHistoricalResultObject;
     status?: ApiStatusObject;
 };
 
@@ -7490,7 +7932,7 @@ export type CryptocurrencyQuotesLatestQuoteObject = {
     /**
      * Price in the specified currency.
      */
-    price: number;
+    price: number | null;
     /**
      * Rolling 24 hour adjusted volume in the specified currency.
      */
@@ -7522,7 +7964,7 @@ export type CryptocurrencyQuotesLatestQuoteObject = {
     /**
      * Market cap in the specified currency.
      */
-    market_cap: number;
+    market_cap: number | null;
     /**
      * Market cap dominance in the specified currency.
      */
@@ -7551,6 +7993,26 @@ export type CryptocurrencyQuotesLatestQuoteObject = {
      * Timestamp (ISO 8601) of when the conversion currency's current value was referenced.
      */
     last_updated: string;
+    /**
+     * 24 hour trading volume from centralized exchanges in the requested currency.
+     */
+    cex_volume_24h?: number;
+    /**
+     * 24 hour trading volume from decentralized exchanges in the requested currency.
+     */
+    dex_volume_24h?: number;
+    /**
+     * 60 day price change as a percentage.
+     */
+    percent_change_60d?: number;
+    /**
+     * 90 day price change as a percentage.
+     */
+    percent_change_90d?: number;
+    /**
+     * Total value locked in the requested currency. `null` when TVL is not available.
+     */
+    tvl?: number | null;
 };
 
 /**
@@ -7591,7 +8053,7 @@ export type CryptocurrencyQuotesLatestCryptocurrencyObject = {
     /**
      * The cryptocurrency's CoinMarketCap rank by market cap.
      */
-    cmc_rank?: number;
+    cmc_rank?: number | null;
     /**
      * The number of active trading pairs available for this cryptocurrency across supported exchanges.
      */
@@ -7611,12 +8073,28 @@ export type CryptocurrencyQuotesLatestCryptocurrencyObject = {
     /**
      * The expected maximum limit of coins ever to be available for this cryptocurrency.
      */
-    max_supply?: number;
+    max_supply?: number | null;
     /**
      * Timestamp (ISO 8601) of when this cryptocurrency was added to CoinMarketCap.
      */
     date_added?: string;
-    tags?: Tags;
+    /**
+     * Tags associated with this cryptocurrency. The v1 endpoint returns tag slugs as strings. The v2 endpoint returns tag objects with `slug`, `name` and `category`.
+     */
+    tags?: Array<string | {
+        /**
+         * Tag slug.
+         */
+        slug?: string;
+        /**
+         * Tag name.
+         */
+        name?: string;
+        /**
+         * Tag category, for example `ALGORITHM` or `CATEGORY`.
+         */
+        category?: string;
+    }>;
     platform?: Platform;
     /**
      * Timestamp (ISO 8601) of the last time this cryptocurrency's market data was updated.
@@ -7635,13 +8113,21 @@ export type CryptocurrencyQuotesLatestCryptocurrencyObject = {
      */
     minted_market_cap?: number;
     quote: CryptocurrencyQuotesLatestQuoteMap;
+    /**
+     * Whether this cryptocurrency is known to have an infinite supply.
+     */
+    infinite_supply?: boolean;
+    /**
+     * Ratio of total value locked to market cap. `null` when TVL is not available.
+     */
+    tvl_ratio?: number | null;
 };
 
 /**
  * A map of cryptocurrency objects by ID, symbol, or slug (as used in query parameters).
  */
 export type CryptocurrencyQuotesLatestCryptocurrencyResultsMap = {
-    [key: string]: CryptocurrencyQuotesLatestCryptocurrencyObject;
+    [key: string]: CryptocurrencyQuotesLatestCryptocurrencyObject | Array<CryptocurrencyQuotesLatestCryptocurrencyObject>;
 };
 
 export type CryptocurrencyQuotesLatestResponseModel = {
@@ -7718,7 +8204,7 @@ export type CryptocurrencyTrendingLatestCryptocurrencyObject = {
     /**
      * The expected maximum limit of coins ever to be available for this cryptocurrency.
      */
-    max_supply?: number;
+    max_supply?: number | null;
     /**
      * Timestamp (ISO 8601) of the last time this cryptocurrency's market data was updated.
      */
@@ -7730,6 +8216,18 @@ export type CryptocurrencyTrendingLatestCryptocurrencyObject = {
     tags?: Tags;
     platform?: Platform;
     quote: CryptocurrencyQuoteMap;
+    /**
+     * Whether this cryptocurrency is known to have an infinite supply.
+     */
+    infinite_supply?: boolean;
+    /**
+     * Ratio of total value locked to market cap. `null` when TVL is not available.
+     */
+    tvl_ratio?: number | null;
+    /**
+     * Market cap calculated from the minted supply, in the requested currency.
+     */
+    minted_market_cap?: number;
 };
 
 /**
@@ -7804,6 +8302,14 @@ export type ExchangeListingsLatestQuoteObject = {
      * Reported all time spot volume in the specified currency.
      */
     spot_volume_usd?: number;
+    /**
+     * Reported 24 hour spot volume in the specified currency.
+     */
+    spot_volume?: number;
+    /**
+     * Aggregate 24h derivative trade volume in USD.
+     */
+    derivative_volume_usd?: number;
 };
 
 /**
@@ -7840,7 +8346,7 @@ export type ExchangeListingsLatestExchangeObject = {
     /**
      * The exchange score.
      */
-    exchange_score?: number;
+    exchange_score?: number | null;
     /**
      * The liquidity score.
      */
@@ -7848,16 +8354,20 @@ export type ExchangeListingsLatestExchangeObject = {
     /**
      * The exchange rank.
      */
-    rank?: number;
+    rank?: number | null;
     /**
      * The traffic score.
      */
-    traffic_score?: number;
+    traffic_score?: number | null;
     /**
      * Timestamp (ISO 8601) of the last time this record was upated.
      */
     last_updated: string;
     quote: ExchangeListingsLatestQuoteMap;
+    /**
+     * Number of distinct coins traded on this exchange.
+     */
+    num_coins?: number;
 };
 
 /**
@@ -8024,6 +8534,14 @@ export type ExchangeMarketPairsLatestMarketPairInfoObject = {
     quote: ExchangeMarketPairsLatestMarketPairQuoteObject;
     market_pair_base: ExchangeMarketPairsLatestPairBaseCurrencyInfoObject;
     market_pair_quote: ExchangeMarketPairsLatestPairBaseCurrencyInfoObject1;
+    /**
+     * 1 if this market pair has been flagged as an outlier, otherwise 0.
+     */
+    outlier_detected?: number;
+    /**
+     * Reasons this market pair is excluded from aggregate calculations, if any.
+     */
+    exclusions?: Array<string> | null;
 };
 
 /**
@@ -8131,7 +8649,10 @@ export type ExchangeHistoricalQuotesResultsMap = {
 };
 
 export type ExchangeHistoricalQuotesResponseModel = {
-    data: ExchangeHistoricalQuotesResultsMap;
+    /**
+     * A single object when you request one exchange, and an object map keyed by exchange ID when you request several.
+     */
+    data: ExchangeHistoricalQuotesResultsMap | ExchangeHistoricalQuotesExchangeObject;
     status?: ApiStatusObject;
 };
 
@@ -8178,11 +8699,23 @@ export type ExchangeQuotesLatestQuoteObject = {
     /**
      * Reported 24 hour derivative volume in the specified currency.
      */
-    derivative_volume?: number;
+    derivative_volume?: number | null;
     /**
      * Reported 24 hour spot volume in the specified currency.
      */
     spot_volume?: number;
+    /**
+     * Aggregate 24h derivative trade volume in USD.
+     */
+    derivative_volume_usd?: number | null;
+    /**
+     * Reported all time spot volume in the specified currency.
+     */
+    spot_volume_usd?: number;
+    /**
+     * Reported 24 hour derivative open interest in the specified currency.
+     */
+    open_interest?: number | null;
 };
 
 /**
@@ -8215,7 +8748,7 @@ export type ExchangeQuotesLatestExchangeObject = {
     /**
      * The exchange score.
      */
-    exchange_score?: number;
+    exchange_score?: number | null;
     /**
      * The liquidity score.
      */
@@ -8233,6 +8766,10 @@ export type ExchangeQuotesLatestExchangeObject = {
      */
     last_updated: string;
     quote: ExchangeQuotesLatestQuoteMap;
+    /**
+     * Number of distinct coins traded on this exchange.
+     */
+    num_coins?: number;
 };
 
 /**
@@ -8372,6 +8909,66 @@ export type GlobalMetricsQuotesLatestQuoteObject = {
      * Timestamp (ISO 8601) of when the conversion currency's current value was referenced.
      */
     last_updated: string;
+    /**
+     * The sum of rolling 24 hour adjusted volume for all DeFi cryptocurrencies in the requested currency.
+     */
+    defi_volume_24h?: number;
+    /**
+     * The sum of rolling 24 hour reported volume for all DeFi cryptocurrencies in the requested currency.
+     */
+    defi_volume_24h_reported?: number;
+    /**
+     * The sum of market caps for all DeFi cryptocurrencies in the requested currency.
+     */
+    defi_market_cap?: number;
+    /**
+     * Percentage change in 24 hour DeFi volume compared with the previous 24 hours.
+     */
+    defi_24h_percentage_change?: number;
+    /**
+     * The sum of rolling 24 hour adjusted volume for all stablecoins in the requested currency.
+     */
+    stablecoin_volume_24h?: number;
+    /**
+     * The sum of rolling 24 hour reported volume for all stablecoins in the requested currency.
+     */
+    stablecoin_volume_24h_reported?: number;
+    /**
+     * The sum of market caps for all stablecoins in the requested currency.
+     */
+    stablecoin_market_cap?: number;
+    /**
+     * Percentage change in 24 hour stablecoin volume compared with the previous 24 hours.
+     */
+    stablecoin_24h_percentage_change?: number;
+    /**
+     * The sum of rolling 24 hour adjusted volume for all derivatives markets in the requested currency.
+     */
+    derivatives_volume_24h?: number;
+    /**
+     * The sum of rolling 24 hour reported volume for all derivatives markets in the requested currency.
+     */
+    derivatives_volume_24h_reported?: number;
+    /**
+     * Percentage change in 24 hour derivatives volume compared with the previous 24 hours.
+     */
+    derivatives_24h_percentage_change?: number;
+    /**
+     * Total cryptocurrency market cap as of yesterday, in the requested currency.
+     */
+    total_market_cap_yesterday?: number;
+    /**
+     * Total 24 hour volume as of yesterday, in the requested currency.
+     */
+    total_volume_24h_yesterday?: number;
+    /**
+     * Percentage change in total market cap compared with yesterday.
+     */
+    total_market_cap_yesterday_percentage_change?: number;
+    /**
+     * Percentage change in total 24 hour volume compared with yesterday.
+     */
+    total_volume_24h_yesterday_percentage_change?: number;
 };
 
 /**
@@ -8418,6 +9015,107 @@ export type GlobalMetricsQuotesLatestResultsObject = {
      */
     last_updated: string;
     quote: GlobalMetricsQuotesLatestQuoteMap;
+    /**
+     * Ethereum's market dominance percentage by market cap as of yesterday.
+     */
+    eth_dominance_yesterday?: number;
+    /**
+     * Bitcoin's market dominance percentage by market cap as of yesterday.
+     */
+    btc_dominance_yesterday?: number;
+    /**
+     * Change in Ethereum's market dominance since yesterday, in percentage points.
+     */
+    eth_dominance_24h_percentage_change?: number;
+    /**
+     * Change in Bitcoin's market dominance since yesterday, in percentage points.
+     */
+    btc_dominance_24h_percentage_change?: number;
+    /**
+     * The sum of rolling 24 hour adjusted volume for all DeFi cryptocurrencies in USD.
+     */
+    defi_volume_24h?: number;
+    /**
+     * The sum of rolling 24 hour reported volume for all DeFi cryptocurrencies in USD.
+     */
+    defi_volume_24h_reported?: number;
+    /**
+     * The sum of market caps for all DeFi cryptocurrencies in USD.
+     */
+    defi_market_cap?: number;
+    /**
+     * Percentage change in 24 hour DeFi volume compared with the previous 24 hours.
+     */
+    defi_24h_percentage_change?: number;
+    /**
+     * The sum of rolling 24 hour adjusted volume for all stablecoins in USD.
+     */
+    stablecoin_volume_24h?: number;
+    /**
+     * The sum of rolling 24 hour reported volume for all stablecoins in USD.
+     */
+    stablecoin_volume_24h_reported?: number;
+    /**
+     * The sum of market caps for all stablecoins in USD.
+     */
+    stablecoin_market_cap?: number;
+    /**
+     * Percentage change in 24 hour stablecoin volume compared with the previous 24 hours.
+     */
+    stablecoin_24h_percentage_change?: number;
+    /**
+     * The sum of rolling 24 hour adjusted volume for all derivatives markets in USD.
+     */
+    derivatives_volume_24h?: number;
+    /**
+     * The sum of rolling 24 hour reported volume for all derivatives markets in USD.
+     */
+    derivatives_volume_24h_reported?: number;
+    /**
+     * Percentage change in 24 hour derivatives volume compared with the previous 24 hours.
+     */
+    derivatives_24h_percentage_change?: number;
+    /**
+     * Total number of DEX tokens tracked by CoinMarketCap.
+     */
+    total_crypto_dex_currencies?: number;
+    /**
+     * Number of new cryptocurrencies and DEX tokens tracked so far today (UTC).
+     */
+    today_incremental_crypto_number?: number;
+    /**
+     * Number of new cryptocurrencies and DEX tokens tracked in the past 24 hours.
+     */
+    past_24h_incremental_crypto_number?: number;
+    /**
+     * Number of new cryptocurrencies and DEX tokens tracked in the past 7 days.
+     */
+    past_7d_incremental_crypto_number?: number;
+    /**
+     * Number of new cryptocurrencies and DEX tokens tracked in the past 30 days.
+     */
+    past_30d_incremental_crypto_number?: number;
+    /**
+     * The highest and lowest number of new cryptocurrencies and DEX tokens tracked in a single day over the past year.
+     */
+    tracked_yearly_number?: {
+        /**
+         * Highest number of new assets tracked in a single day.
+         */
+        maxIncrementalNumber?: number;
+        /**
+         * Lowest number of new assets tracked in a single day.
+         */
+        minIncrementalNumber?: number;
+        /**
+         * Date (ISO 8601) of the day with the highest number.
+         */
+        maxIncrementalDate?: string;
+        /**
+         * Date (ISO 8601) of the day with the lowest number.
+         */
+        minIncrementalDate?: string;
+    };
 };
 
 export type GlobalMetricsQuotesLatestResponseModel = {
@@ -8682,7 +9380,7 @@ export type DerivativesMarketPairsListLatestResultsObject = {
         /**
          * Symbol pair identifier as listed on the exchange.
          */
-        market_pair?: string;
+        market_pair_symbol?: string;
         /**
          * Derivative category.
          */
@@ -8748,11 +9446,11 @@ export type DerivativesMarketPairsListLatestResultsObject = {
             /**
              * CoinMarketCap ID of the conversion currency.
              */
-            crypto_id?: number;
+            convert_id?: number;
             /**
              * Symbol of the conversion currency.
              */
-            symbol?: string;
+            convert_symbol?: string;
             /**
              * Last reported price in the conversion currency.
              */
@@ -8788,7 +9486,7 @@ export type DerivativesMarketPairsListLatestResultsObject = {
             /**
              * Share of this market pair in the exchange's total 24h derivative volume.
              */
-            volume_percentage?: number;
+            volume_percentage?: number | null;
         }>;
         /**
          * CoinMarketCap-normalized quotes, one entry per requested conversion currency.
@@ -8797,11 +9495,11 @@ export type DerivativesMarketPairsListLatestResultsObject = {
             /**
              * CoinMarketCap ID of the conversion currency.
              */
-            crypto_id?: number;
+            convert_id?: number;
             /**
              * Symbol of the conversion currency.
              */
-            symbol?: string;
+            convert_symbol?: string;
             /**
              * Normalized last price in the conversion currency.
              */
@@ -8858,7 +9556,7 @@ export type DerivativesCryptoMarketPairsListLatestResultsObject = {
         /**
          * Symbol pair identifier as listed on the exchange.
          */
-        market_pair?: string;
+        market_pair_symbol?: string;
         /**
          * Derivative category.
          */
@@ -8941,11 +9639,11 @@ export type DerivativesCryptoMarketPairsListLatestResultsObject = {
             /**
              * CoinMarketCap ID of the conversion currency.
              */
-            crypto_id?: number;
+            convert_id?: number;
             /**
              * Symbol of the conversion currency.
              */
-            symbol?: string;
+            convert_symbol?: string;
             /**
              * Last reported price in the conversion currency.
              */
@@ -8986,11 +9684,11 @@ export type DerivativesCryptoMarketPairsListLatestResultsObject = {
             /**
              * CoinMarketCap ID of the conversion currency.
              */
-            crypto_id?: number;
+            convert_id?: number;
             /**
              * Symbol of the conversion currency.
              */
-            symbol?: string;
+            convert_symbol?: string;
             /**
              * Normalized last price in the conversion currency.
              */
@@ -9701,7 +10399,7 @@ export type GetV3CryptocurrencyQuotesLatestResponses = {
     /**
      * OK
      */
-    200: Array<CryptoQuoteV3Dto>;
+    200: V3CryptocurrencyQuotesLatestResponseModel;
 };
 
 export type GetV3CryptocurrencyQuotesLatestResponse = GetV3CryptocurrencyQuotesLatestResponses[keyof GetV3CryptocurrencyQuotesLatestResponses];
@@ -13897,7 +14595,7 @@ export type GetTrendingListResponses = {
     /**
      * OK
      */
-    200: TrendingTokensResponseDto;
+    200: V1DexTokensTrendingListResponseModel;
 };
 
 export type GetTrendingListResponse = GetTrendingListResponses[keyof GetTrendingListResponses];
@@ -13913,7 +14611,7 @@ export type BatchQueryTokensResponses = {
     /**
      * OK
      */
-    200: Array<TokenDetailDto>;
+    200: V1DexTokensBatchQueryResponseModel;
 };
 
 export type BatchQueryTokensResponse = BatchQueryTokensResponses[keyof BatchQueryTokensResponses];
@@ -13929,7 +14627,7 @@ export type BatchGetTokenPriceResponses = {
     /**
      * OK
      */
-    200: Array<TokenPriceDto>;
+    200: V1DexTokenPriceBatchResponseModel;
 };
 
 export type BatchGetTokenPriceResponse = BatchGetTokenPriceResponses[keyof BatchGetTokenPriceResponses];
@@ -13945,7 +14643,7 @@ export type GetNewListResponses = {
     /**
      * OK
      */
-    200: NewTokenLeaderBoardResponseDto;
+    200: V1DexNewListResponseModel;
 };
 
 export type GetNewListResponse = GetNewListResponses[keyof GetNewListResponses];
@@ -13961,7 +14659,7 @@ export type GetMemeListResponses = {
     /**
      * OK
      */
-    200: MemeCoinResponseDto;
+    200: V1DexMemeListResponseModel;
 };
 
 export type GetMemeListResponse = GetMemeListResponses[keyof GetMemeListResponses];
@@ -13977,7 +14675,7 @@ export type GetGainerLoserListResponses = {
     /**
      * OK
      */
-    200: GainerLeaderBoardResponseDto;
+    200: V1DexGainerLoserListResponseModel;
 };
 
 export type GetGainerLoserListResponse = GetGainerLoserListResponses[keyof GetGainerLoserListResponses];
@@ -14154,7 +14852,7 @@ export type GetSpotPairsLatestResponses = {
     /**
      * OK
      */
-    200: Array<DexSpotPairDto>;
+    200: V4DexSpotPairsLatestResponseModel;
 };
 
 export type GetSpotPairsLatestResponse = GetSpotPairsLatestResponses[keyof GetSpotPairsLatestResponses];
@@ -14208,7 +14906,7 @@ export type GetPairsLatestTradeResponses = {
     /**
      * OK
      */
-    200: Array<DexPairsTradeDto>;
+    200: V4DexPairsTradeLatestResponseModel;
 };
 
 export type GetPairsLatestTradeResponse = GetPairsLatestTradeResponses[keyof GetPairsLatestTradeResponses];
@@ -14255,7 +14953,7 @@ export type GetLatestPairsQuotesResponses = {
     /**
      * OK
      */
-    200: Array<DexParisQuotesDto>;
+    200: V4DexPairsQuotesLatestResponseModel;
 };
 
 export type GetLatestPairsQuotesResponse = GetLatestPairsQuotesResponses[keyof GetLatestPairsQuotesResponses];
@@ -14302,7 +15000,7 @@ export type GetPairsLatestOhlcvResponses = {
     /**
      * OK
      */
-    200: Array<DexPairsOhlcvDto>;
+    200: V4DexPairsOhlcvLatestResponseModel;
 };
 
 export type GetPairsLatestOhlcvResponse = GetPairsLatestOhlcvResponses[keyof GetPairsLatestOhlcvResponses];
@@ -14379,7 +15077,7 @@ export type GetPairsHistoricalOhlcvResponses = {
     /**
      * OK
      */
-    200: Array<DexPairsOhlcvHistoricalDto>;
+    200: V4DexPairsOhlcvHistoricalResponseModel;
 };
 
 export type GetPairsHistoricalOhlcvResponse = GetPairsHistoricalOhlcvResponses[keyof GetPairsHistoricalOhlcvResponses];
@@ -14423,7 +15121,7 @@ export type GetNetworksResponses = {
     /**
      * OK
      */
-    200: Array<NetworkInfoDto>;
+    200: V4DexNetworksListResponseModel;
 };
 
 export type GetNetworksResponse = GetNetworksResponses[keyof GetNetworksResponses];
@@ -14479,7 +15177,7 @@ export type GetLatestListingsResponses = {
     /**
      * OK
      */
-    200: Array<DexInfoDto>;
+    200: V4DexListingsQuotesResponseModel;
 };
 
 export type GetLatestListingsResponse = GetLatestListingsResponses[keyof GetLatestListingsResponses];
@@ -14506,7 +15204,7 @@ export type GetListingsInfoResponses = {
     /**
      * OK
      */
-    200: Array<DexCommonInfoDto>;
+    200: V4DexListingsInfoResponseModel;
 };
 
 export type GetListingsInfoResponse = GetListingsInfoResponses[keyof GetListingsInfoResponses];
@@ -14555,7 +15253,7 @@ export type GetKlinePointsResponses = {
     /**
      * OK
      */
-    200: Array<Array<number>>;
+    200: V1KLinePointsResponseModel;
 };
 
 export type GetKlinePointsResponse = GetKlinePointsResponses[keyof GetKlinePointsResponses];
@@ -14604,7 +15302,7 @@ export type GetKlineCandlesResponses = {
     /**
      * OK
      */
-    200: Array<Array<number>>;
+    200: V1KLineCandlesResponseModel;
 };
 
 export type GetKlineCandlesResponse = GetKlineCandlesResponses[keyof GetKlineCandlesResponses];
@@ -14629,7 +15327,7 @@ export type GetTokenResponses = {
     /**
      * OK
      */
-    200: TokenDetailDto;
+    200: V1DexTokenResponseModel;
 };
 
 export type GetTokenResponse = GetTokenResponses[keyof GetTokenResponses];
@@ -14654,7 +15352,7 @@ export type GetTokenPriceResponses = {
     /**
      * OK
      */
-    200: TokenPriceDto;
+    200: V1DexTokenPriceResponseModel;
 };
 
 export type GetTokenPriceResponse = GetTokenPriceResponses[keyof GetTokenPriceResponses];
@@ -14680,7 +15378,7 @@ export type GetTokenPoolsResponses = {
     /**
      * OK
      */
-    200: Array<TokenTopPoolDto>;
+    200: V1DexTokenPoolsResponseModel;
 };
 
 export type GetTokenPoolsResponse = GetTokenPoolsResponses[keyof GetTokenPoolsResponses];
@@ -14721,7 +15419,7 @@ export type QueryTokenLiquidityResponses = {
     /**
      * OK
      */
-    200: Array<TokenLiquiditySnapshotDto>;
+    200: V1DexTokenLiquidityQueryResponseModel;
 };
 
 export type QueryTokenLiquidityResponse = QueryTokenLiquidityResponses[keyof QueryTokenLiquidityResponses];
@@ -14794,7 +15492,7 @@ export type GetSwapListResponses = {
     /**
      * OK
      */
-    200: SwapListResponseDto;
+    200: V1DexTokensTransactionsResponseModel;
 };
 
 export type GetSwapListResponse = GetSwapListResponses[keyof GetSwapListResponses];
@@ -14819,7 +15517,7 @@ export type GetSecurityDetailResponses = {
     /**
      * OK
      */
-    200: Array<TokenSecurityResponseDto>;
+    200: V1DexSecurityDetailResponseModel;
 };
 
 export type GetSecurityDetailResponse = GetSecurityDetailResponses[keyof GetSecurityDetailResponses];
@@ -14856,7 +15554,7 @@ export type SearchResponses = {
     /**
      * OK
      */
-    200: SearchResponseDto;
+    200: V1DexSearchResponseModel;
 };
 
 export type SearchResponse = SearchResponses[keyof SearchResponses];
@@ -14872,7 +15570,7 @@ export type GetPlatformListResponses = {
     /**
      * OK
      */
-    200: Array<PlatformDto>;
+    200: V1DexPlatformListResponseModel;
 };
 
 export type GetPlatformListResponse = GetPlatformListResponses[keyof GetPlatformListResponses];
@@ -14893,7 +15591,7 @@ export type GetPlatformDetailResponses = {
     /**
      * OK
      */
-    200: PlatformDto;
+    200: V1DexPlatformDetailResponseModel;
 };
 
 export type GetPlatformDetailResponse = GetPlatformDetailResponses[keyof GetPlatformDetailResponses];
@@ -14958,7 +15656,7 @@ export type GetLiquidityChangeListResponses = {
     /**
      * OK
      */
-    200: LiquidityChangeListResponseDto;
+    200: V1DexLiquidityChangeListResponseModel;
 };
 
 export type GetLiquidityChangeListResponse = GetLiquidityChangeListResponses[keyof GetLiquidityChangeListResponses];
@@ -14974,7 +15672,7 @@ export type GetHoldersResponses = {
     /**
      * OK
      */
-    200: HolderDexVo;
+    200: V1DexHoldersListResponseModel;
 };
 
 export type GetHoldersResponse = GetHoldersResponses[keyof GetHoldersResponses];
@@ -14990,7 +15688,7 @@ export type GetHolderDetailResponses = {
     /**
      * OK
      */
-    200: HolderDetailVo;
+    200: V1DexHoldersDetailResponseModel;
 };
 
 export type GetHolderDetailResponse = GetHolderDetailResponses[keyof GetHolderDetailResponses];
@@ -15031,7 +15729,7 @@ export type GetHoldTrendListResponses = {
     /**
      * OK
      */
-    200: Array<HolderTrendVo>;
+    200: V1DexHoldersTrendListResponseModel;
 };
 
 export type GetHoldTrendListResponse = GetHoldTrendListResponses[keyof GetHoldTrendListResponses];
@@ -15050,7 +15748,7 @@ export type GetHolderTagCountResponses = {
     /**
      * OK
      */
-    200: HolderTagCountVo;
+    200: V1DexHoldersTagCountResponseModel;
 };
 
 export type GetHolderTagCountResponse = GetHolderTagCountResponses[keyof GetHolderTagCountResponses];
@@ -15069,7 +15767,7 @@ export type GetHolderCountResponses = {
     /**
      * OK
      */
-    200: HolderCountVo;
+    200: V1DexHoldersCountResponseModel;
 };
 
 export type GetHolderCountResponse = GetHolderCountResponses[keyof GetHolderCountResponses];
