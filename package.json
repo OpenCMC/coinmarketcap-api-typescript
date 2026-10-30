@@ -1,6 +1,6 @@
 {
   "name": "@coinmarketcap/sdk",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Official CoinMarketCap Pro API TypeScript/JavaScript SDK",
   "author": "CoinMarketCap <api@coinmarketcap.com>",
   "license": "MIT",

@@ -6,13 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this package adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 The TypeScript and Python SDKs share one version number (see Versioning in the README).
 
-## [5.0.0] - Unreleased
+## [5.0.1] - 2026-10-30
+
+Rebuilt from the OpenAPI spec published at
+https://coinmarketcap.com/api/documentation/openapi.json (spec version `3.0.3`,
+sha256 `3e72a1c4…17c9`). The TypeScript SDK has no code changes; it moves to 5.0.1
+to keep one version with the Go and Python SDKs.
+
+### Changed
+
+- Doc comments follow the updated endpoint descriptions, for example which API plans
+  include each endpoint.
+
+## [5.0.0] - 2026-10-23
 
 Rebuilt from the corrected OpenAPI spec published at
 https://coinmarketcap.com/api/documentation/openapi.json (spec version `3.0.3`,
 sha256 `855b21bb…3e0b`).
 
 ### Changed (breaking)
+
 - 32 methods now type the full `{ status, data }` response body. Before, their types
   described only the inner `data`, which did not match what the API returns. Read results
   from `response.data.data`. The values at runtime are unchanged; only the types are.
@@ -26,6 +39,7 @@ sha256 `855b21bb…3e0b`).
   `market_pair_quotes`.
 
 ### Fixed
+
 - Fields the API can return as `null` are typed as nullable, for example `platform` on
   Bitcoin in `cryptocurrency.listingsLatest`.
 - DEX integer values that the API returns as strings (timestamps, counts) are typed as
@@ -33,12 +47,14 @@ sha256 `855b21bb…3e0b`).
 - Every endpoint uses the same `status` type.
 
 ### Added
+
 - 146 response fields that were missing from the types, including the DeFi, stablecoin,
   derivatives and dominance fields on `globalMetrics.quotesLatest`.
 
 ## [4.0.3] - 2026-09-18
 
 ### Added
+
 - `cmcAi` namespace for the CMC AI endpoints: `cmcAi.coinsMap` (`GET /v5/cmc-ai/coins/map`),
   `cmcAi.latest` (`GET /v5/cmc-ai/latest`) and `cmcAi.coinsLatest`
   (`GET /v5/cmc-ai/coins/latest`), with their request and response types.
@@ -46,9 +62,11 @@ sha256 `855b21bb…3e0b`).
 ## [4.0.2] - 2026-08-11
 
 ### Changed (breaking)
+
 - `holder.s` is renamed `holder.holders`, and `token.getToken` is renamed `token.token`.
 
 ### Fixed
+
 - Retried POST requests, which include every DEX POST endpoint, failed with "Body is
   unusable". Each retry now sends the original request body again.
 - An `AbortSignal` passed by the caller now cancels the request. A cancelled request is
@@ -58,11 +76,13 @@ sha256 `855b21bb…3e0b`).
   maximum retry delay.
 
 ### Added
+
 - `api.md`, the endpoint reference, is included in the npm package.
 
 ## [4.0.1] - 2026-08-06
 
 ### Added
+
 - Initial SDK release
 - `CoinMarketCap` client class with authentication, retries, and timeout
 - `init()` for quick-start global client configuration
