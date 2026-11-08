@@ -28,14 +28,12 @@ function buildFetchWithRetry(
     const userSignal: AbortSignal | null =
       init?.signal ?? (input instanceof Request ? input.signal : null) ?? null;
 
-    let lastResponse: Response | undefined;
-    let lastError: unknown;
-
-    for (let attempt = 0; attempt <= retryConfig.maxRetries; attempt++) {
+    for (let attempt = 0; ; attempt++) {
       // Per-attempt controller combining the timeout with the caller's signal
       // so user-initiated cancellation is honoured (previously ignored).
       const controller = new AbortController();
       let timedOut = false;
+      let retryDelay: number;
 
       const onUserAbort = () => controller.abort();
       if (userSignal) {
@@ -51,43 +49,31 @@ function buildFetchWithRetry(
         // Clone per attempt so the buffered body can be replayed on retry.
         const response = await baseFetch(baseRequest.clone(), { signal: controller.signal });
 
-        if (response.ok || !shouldRetry(response.status, retryConfig)) {
+        if (response.ok || !shouldRetry(response.status, retryConfig) || attempt >= retryConfig.maxRetries) {
           return response;
         }
 
-        lastResponse = response;
-        if (attempt < retryConfig.maxRetries) {
-          await sleep(getRetryDelay(attempt, response.status, retryConfig, response.headers));
-        }
+        retryDelay = getRetryDelay(attempt, response.status, retryConfig, response.headers);
       } catch (error: unknown) {
-        // Timeout: transient, retry with a typed error surfaced if exhausted.
-        if (timedOut) {
-          lastError = new APITimeoutError(timeout);
-          if (attempt < retryConfig.maxRetries) {
-            await sleep(getRetryDelay(attempt, 0, retryConfig, new Headers()));
-          }
-          continue;
-        }
-
-        // Caller cancelled: propagate immediately, never retry.
+        // Caller cancellation wins over timeout and must never be retried.
         if (userSignal?.aborted) {
           throw error;
         }
 
-        lastError = error;
-        if (!(error instanceof TypeError)) throw error; // non-network error
+        const retryError = timedOut ? new APITimeoutError(timeout) : error;
+        if (!timedOut && !(error instanceof TypeError)) throw error;
+        if (attempt >= retryConfig.maxRetries) throw retryError;
 
-        if (attempt < retryConfig.maxRetries) {
-          await sleep(getRetryDelay(attempt, 0, retryConfig, new Headers()));
-        }
+        retryDelay = getRetryDelay(attempt, 0, retryConfig, new Headers());
       } finally {
         clearTimeout(timeoutId);
         if (userSignal) userSignal.removeEventListener('abort', onUserAbort);
       }
-    }
 
-    if (lastResponse) return lastResponse;
-    throw lastError;
+      // Only the fetch is subject to the per-attempt timeout. The retry wait
+      // remains cancellable after that attempt's timer/listener are cleaned up.
+      await sleep(retryDelay, userSignal);
+    }
   };
 }
 

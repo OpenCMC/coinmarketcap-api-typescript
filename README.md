@@ -183,6 +183,7 @@ Requests that fail with retryable status codes are automatically retried with ex
 - **Default**: 2 retries with 500ms initial delay, up to 8s max
 - **429 responses**: Respects the `Retry-After` header, capped at the max delay (8s) so a large value can't stall the call
 - **Body-safe**: Request bodies are replayed correctly on each retry (POST endpoints included)
+- **Final outcome**: Exhausted retries surface the last attempt's HTTP, network, or timeout error
 
 Disable retries:
 
@@ -208,8 +209,8 @@ A timeout raises `APITimeoutError`.
 
 ## Cancellation
 
-Pass an `AbortSignal` to cancel an in-flight request. Caller cancellation is
-honoured immediately and is never retried:
+Pass an `AbortSignal` to cancel an in-flight request or a retry backoff wait. Caller
+cancellation is honoured immediately and is never retried:
 
 ```typescript
 const controller = new AbortController();
