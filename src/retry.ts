@@ -31,6 +31,21 @@ export function getRetryDelay(attempt: number, status: number, config: RetryConf
   return Math.min(base + jitter, config.maxDelayMs);
 }
 
-export function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+export function sleep(ms: number, signal?: AbortSignal | null): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason);
+      return;
+    }
+
+    const onAbort = () => {
+      clearTimeout(timeoutId);
+      reject(signal!.reason);
+    };
+    const timeoutId = setTimeout(() => {
+      signal?.removeEventListener('abort', onAbort);
+      resolve();
+    }, ms);
+    signal?.addEventListener('abort', onAbort, { once: true });
+  });
 }

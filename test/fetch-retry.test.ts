@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { CoinMarketCap } from '../src/index';
+import { CoinMarketCap, APIConnectionError, APITimeoutError, InternalServerError } from '../src/index';
 
 const okBody = JSON.stringify({ status: { error_code: 0, error_message: null }, data: {} });
 
@@ -71,4 +71,98 @@ describe('retry fetch — respects caller AbortSignal (#2)', () => {
     assert.equal(completed, false, 'request must be cancelled, not run to completion');
     assert.equal(calls, 1, 'user-initiated abort must not be retried');
   });
+});
+
+describe('retry fetch — final attempt outcome', () => {
+  it('surfaces the last network error rather than an earlier HTTP response', async () => {
+    let calls = 0;
+    const finalError = new TypeError('last connection failed');
+    const mockFetch: typeof fetch = async () => {
+      calls += 1;
+      if (calls === 1) return jsonResponse(503, '{}');
+      throw calls === 2 ? new TypeError('first connection failed') : finalError;
+    };
+    const cmc = new CoinMarketCap({ apiKey: 'k', fetch: mockFetch, maxRetries: 2 });
+
+    const result = await cmc.api.cryptocurrency.quotesLatest({ query: { symbol: 'BTC' } });
+
+    assert(result.error instanceof APIConnectionError);
+    assert.equal(result.error.cause, finalError);
+    assert.equal(result.response, undefined);
+    assert.equal(calls, 3);
+  });
+
+  it('surfaces the last timeout rather than an earlier HTTP response', async () => {
+    let calls = 0;
+    const mockFetch: typeof fetch = async (_input, init) => {
+      calls += 1;
+      if (calls === 1) return jsonResponse(503, '{}');
+      // Exercise the real per-attempt timer/AbortSignal ordering, not a simulated fetch clock.
+      return new Promise<Response>((_resolve, reject) => {
+        init?.signal?.addEventListener('abort', () => reject(init.signal!.reason), { once: true });
+      });
+    };
+    const cmc = new CoinMarketCap({ apiKey: 'k', fetch: mockFetch, timeout: 10, maxRetries: 2 });
+
+    await assert.rejects(
+      cmc.api.cryptocurrency.quotesLatest({ query: { symbol: 'BTC' }, throwOnError: true }),
+      APITimeoutError,
+    );
+    assert.equal(calls, 3);
+  });
+
+  it('still returns the final HTTP response after an earlier network error', async () => {
+    let calls = 0;
+    const mockFetch: typeof fetch = async () => {
+      calls += 1;
+      if (calls === 1) throw new TypeError('connection failed');
+      return jsonResponse(calls === 2 ? 503 : 502, '{}');
+    };
+    const cmc = new CoinMarketCap({ apiKey: 'k', fetch: mockFetch, maxRetries: 2 });
+
+    const result = await cmc.api.cryptocurrency.quotesLatest({ query: { symbol: 'BTC' } });
+
+    assert(result.error instanceof InternalServerError);
+    assert.equal(result.response.status, 502);
+    assert.equal(calls, 3);
+  });
+});
+
+describe('retry fetch — cancellation during backoff', () => {
+  for (const outcome of ['http', 'network', 'timeout'] as const) {
+    it(`cancels the ${outcome} retry wait without another fetch`, { timeout: 1000 }, async () => {
+      const controller = new AbortController();
+      let calls = 0;
+      const mockFetch: typeof fetch = async (_input, init) => {
+        calls += 1;
+        init?.signal?.throwIfAborted();
+        if (outcome === 'timeout') {
+          return new Promise<Response>((_resolve, reject) => {
+            init?.signal?.addEventListener('abort', () => {
+              reject(init.signal!.reason);
+              setImmediate(() => controller.abort());
+            }, { once: true });
+          });
+        }
+        // The resolved/rejected fetch enters backoff before the next event-loop turn.
+        setImmediate(() => controller.abort());
+        if (outcome === 'network') throw new TypeError('connection failed');
+        return new Response('{}', { status: 429, headers: { 'Retry-After': '8' } });
+      };
+      const cmc = new CoinMarketCap({
+        apiKey: 'k',
+        fetch: mockFetch,
+        timeout: outcome === 'timeout' ? 10 : 30_000,
+        maxRetries: 2,
+      });
+      const promise = cmc.api.cryptocurrency.quotesLatest({
+        query: { symbol: 'BTC' },
+        signal: controller.signal,
+        throwOnError: true,
+      });
+      await assert.rejects(promise, (error: unknown) =>
+        error instanceof DOMException && error.name === 'AbortError');
+      assert.equal(calls, 1, 'caller cancellation must not start another attempt');
+    });
+  }
 });

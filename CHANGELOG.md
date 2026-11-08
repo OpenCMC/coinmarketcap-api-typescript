@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this package adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 The TypeScript and Python SDKs share one version number (see Versioning in the README).
 
+## [Unreleased]
+
+### Fixed
+
+- Retry exhaustion surfaces the final attempt's connection or timeout error instead
+  of returning an earlier retryable HTTP response.
+- Caller cancellation interrupts HTTP, network, and timeout retry waits immediately.
+  Per-attempt timeout timers are cleared before waiting to retry.
+
 ## [5.0.1] - 2026-10-30
 
 Rebuilt from the OpenAPI spec published at
